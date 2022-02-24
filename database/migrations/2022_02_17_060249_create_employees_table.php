@@ -15,21 +15,17 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            // $table->unsignedBigInteger('job_title_id');
-            // $table->unsignedBigInteger('department_id');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email');
             $table->string('salary');
-            $table->foreignId('job_title_id')
-                  ->constrained('jobtitles')
-                  ->onUpdate('cascade')
-                  ->onDelete('set null');
-            $table->foreignId('department_id')
-                  ->constrained('department')
-                  ->onUpdate('cascade')
-                  ->onDelete('set null');
-            $table->timestamps();
+            $table->unsignedBigInteger('job_title_id');
+            $table->unsignedBigInteger('department_id');            
+            $table->softDeletes();
+            $table->timestamps();            
+ 
+            // $table->foreign('job_title_id')->references('id')->on('jobtitles')->onDelete('set null');
+            // $table->foreign('department_id')->references('id')->on('department')->onDelete('set null');            
         });
     }
 
@@ -41,7 +37,5 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('employees');
-        // $table->dropForeign(['job_title_id']);
-        // $table->dropForeign(['department_id']);
     }
 };

@@ -30,14 +30,23 @@ class EmployeesController extends Controller
      */
     public function index()
     {
-        $employee = DB::table('employees')
-        ->leftJoin('jobtitles', 'employees.job_title_id', '=', 'jobtitles.id')
-        ->leftJoin('department', 'employees.department_id', '=', 'department.id')
-        ->select('employees.*', 'department.department as department', 'department.id as department_id', 'jobtitles.jobtitle as jobtitle', 'jobtitles.id as job_title_id')
-        ->paginate(20);
-        // $employee = Employee::paginate(20);
+        if(request()->ajax()) {
+            $employees = Employee::with(['department', 'jobTitle']);
 
-        return view('employees/index', ['employee' => $employee]);
+            return datatables()->of($employees)
+                ->editColumn('job_title', function($employee){
+                    return $employee->jobTitle?->name ?? "NA";
+                })
+                ->editColumn('department', function($employee){
+                    return $employee->department?->name;
+                })
+                ->addColumn('action', 'employees.action')
+                ->rawColumns(['action'])
+                ->addIndexColumn()
+                ->make(true);
+        }
+
+        return view('employees.index');
     }
 
     /**
@@ -62,21 +71,43 @@ class EmployeesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(EmployeeRequest $request)
-    {        
-        $employee = Employee::create([
-            'first_name' => $request['first_name'],
-            'last_name' => $request['last_name'],
-            'salary' => $request['salary'],
-            'job_title_id' => $request['job_title_id'],
-            'department_id' => $request['department_id'],
-            'email' => $request['email']
+    public function store(Request $request){
+        $request->validate([
+        'first_name' => 'required',
+        'last_name' => 'required',
+        'email' => 'required',
+        'salary' => 'required',
+        'job_title_id' => 'required',
+        'department_id' => 'required'
         ]);
-        
-        $employee->notify(new SendEmployeeNotification());
-
-        return redirect()->intended('employees');
+        $employee = new Employee;
+        $employee->first_name = $request->first_name;
+        $employee->last_name = $request->last_name;
+        $employee->email = $request->email;
+        $employee->salary = $request->salary;
+        $employee->job_title_id = $request->job_title_id;
+        $employee->department_id = $request->department_id;
+        // $company->email = $request->email;
+        // $company->address = $request->address;
+        $employee->save();
+        return redirect()->route('employees.index');
+        // ->with('success','Employee has been created successfully.');
     }
+    // public function store(EmployeeRequest $request)
+    // {        
+    //     $employee = Employee::create([
+    //         'first_name' => $request['first_name'],
+    //         'last_name' => $request['last_name'],
+    //         'salary' => $request['salary'],
+    //         'job_title_id' => $request['job_title_id'],
+    //         'department_id' => $request['department_id'],
+    //         'email' => $request['email']
+    //     ]);
+        
+    //     $employee->notify(new SendEmployeeNotification());
+
+    //     return redirect()->intended('employees');
+    // }
 
     /**
      * Display the specified resource.
@@ -84,10 +115,13 @@ class EmployeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
+    public function show(Employee $employee){
+        return view('employees.show',compact('employee'));
+    } 
+    // public function show($id)
+    // {
+    //     //
+    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -95,19 +129,24 @@ class EmployeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        
-        $departments = Department::all(); // get all the departments
+    public function edit(Employee $employee){
+        $departments = Department::all();
         $jobtitles = JobTitle::all(); 
-        $employees = Employee::findOrFail($id);
-
-
-        return view('employees/edit', [ 'departments' => $departments,'jobtitles' => $jobtitles, 'employees' => $employees]);
-        // $employees = Employee::findOrFail($id);
-
-        // return view('employees/edit', ['employees' => $employees]);
+        return view('employees.edit',compact('employee','departments', 'jobtitles'));
     }
+    // public function edit($id)
+    // {
+        
+    //     $departments = Department::all(); // get all the departments
+    //     $jobtitles = JobTitle::all(); 
+    //     $employees = Employee::findOrFail($id);
+
+
+    //     return view('employees/edit', [ 'departments' => $departments,'jobtitles' => $jobtitles, 'employees' => $employees]);
+    //     // $employees = Employee::findOrFail($id);
+
+    //     // return view('employees/edit', ['employees' => $employees]);
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -116,23 +155,46 @@ class EmployeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        $employees = Employee::findOrFail($id);
-        $this->validateInput($request);
-        $input = [
-            'first_name' => $request['first_name'],
-            'last_name' => $request['last_name'],
-            'salary' => $request['salary'],
-            'job_title_id' => $request['job_title_id'],
-            'department_id' => $request['department_id'],
-            'email' => $request['email']
-        ];
-        Employee::where('id', $id)
-            ->update($input);
-        
-        return redirect()->intended('employees');
+
+    public function update(Request $request, Employee $employee){
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required',
+            'salary' => 'required',
+            'job_title_id' => 'required',
+            'department_id' => 'required'
+        ]);
+
+        $employee->first_name = $request->first_name;
+        $employee->last_name = $request->last_name;
+        $employee->email = $request->email;
+        $employee->salary = $request->salary;
+        $employee->job_title_id = $request->job_title_id;
+        $employee->department_id = $request->department_id;
+        $employee->save();
+
+        return redirect()->route('employees.index');
+        // ->with('success','Employee has been updated successfully.');
     }
+
+    // public function update(Request $request, $id)
+    // {
+    //     $employees = Employee::findOrFail($id);
+    //     $this->validateInput($request);
+    //     $input = [
+    //         'first_name' => $request['first_name'],
+    //         'last_name' => $request['last_name'],
+    //         'salary' => $request['salary'],
+    //         'job_title_id' => $request['job_title_id'],
+    //         'department_id' => $request['department_id'],
+    //         'email' => $request['email']
+    //     ];
+    //     Employee::where('id', $id)
+    //         ->update($input);
+        
+    //     return redirect()->intended('employees');
+    // }
 
     /**
      * Remove the specified resource from storage.
@@ -140,11 +202,17 @@ class EmployeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        Employee::where('id', $id)->delete();
-         return redirect()->intended('employees');
+    public function destroy(Request $request){
+        $com = Employee::where('id',$request->id)->delete();
+        return Response()->json($com);
+        
     }
+
+    // public function destroy($id)
+    // {
+    //     Employee::where('id', $id)->delete();
+    //      return redirect()->intended('employees');
+    // }
 
     /**
      * Search department from database base on some specific constraints

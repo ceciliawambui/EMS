@@ -9,7 +9,7 @@ class JobTitle extends Model
 {
     use HasFactory;
     protected $table = 'jobtitles';
-    protected $fillable = ['id','jobtitle'];
+    protected $fillable = ['name'];
 
      // relationship, one to many
     // one job title hads many employees

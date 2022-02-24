@@ -76,7 +76,7 @@
                     <div class="row">
                         <div class="col-xl-4 col-md-4 text-center">
                             <div class="card bg-primary text-white mb-4">
-                            <i style="width:450px"class="fa fa-address-book fa-7x"></i>
+                            <i style="width:350px"class="fa fa-address-book fa-7x"></i>
                                 <div class="card-body" style="font-size:20px">Job Titles</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
                                     <a class="small text-white stretched-link" href="{{ url('jobtitles') }}">View
@@ -87,7 +87,7 @@
                         </div>
                         <div class="col-xl-4 col-md-4 text-center">
                             <div class="card bg-primary text-white mb-4">
-                            <i style="width:450px"class="fa fa-sitemap fa-7x"></i>
+                            <i style="width:350px"class="fa fa-sitemap fa-7x"></i>
                                 <div class="card-body" style="font-size:20px">Departments</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
                                     <a class="small text-white stretched-link" href="{{ url('department') }}">View
@@ -98,7 +98,7 @@
                         </div>
                         <div class="col-xl-4 col-md-4 text-center">
                             <div class="card bg-primary text-white mb-4">
-                            <i style="width:450px"class="fa fa-users fa-7x"></i>
+                            <i style="width:350px"class="fa fa-users fa-7x"></i>
                                 <div class="card-body" style="font-size:20px">Employees</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
                                     <a class="small text-white stretched-link" href="{{url ('employees') }}">View

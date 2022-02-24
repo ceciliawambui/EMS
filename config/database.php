@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Str;
 
-$DATABASE_URL=parse_url('postgres://bzipolprbosseb:8fddf1212fb1a956e0850c6ffdea9330de7cbff109c63c493ca7aba665348e04@ec2-54-83-21-198.compute-1.amazonaws.com:5432/d2jqpv4robqavo');
+// $DATABASE_URL=parse_url('postgres://bzipolprbosseb:8fddf1212fb1a956e0850c6ffdea9330de7cbff109c63c493ca7aba665348e04@ec2-54-83-21-198.compute-1.amazonaws.com:5432/d2jqpv4robqavo');
 
 return [
 
@@ -17,7 +17,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'pgsql'),
+    'default' => env('DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -67,19 +67,19 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            // 'url' => env('DATABASE_URL'),
-            // 'host' => env('DB_HOST', '127.0.0.1'),
-            // 'port' => env('DB_PORT', '5432'),
-            // 'database' => env('DB_DATABASE', 'forge'),
-            // 'username' => env('DB_USERNAME', 'forge'),
-            // 'password' => env('DB_PASSWORD', ''),
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '5432'),
+            'database' => env('DB_DATABASE', 'forge'),
+            'username' => env('DB_USERNAME', 'forge'),
+            'password' => env('DB_PASSWORD', ''),
 
             
-            'host' => $DATABASE_URL['host'],
-            'port' => $DATABASE_URL['port'],
-            'database' => ltrim($DATABASE_URL['path'],"/"),
-            'username' => $DATABASE_URL['user'],
-            'password' => $DATABASE_URL['pass'],
+            // 'host' => $DATABASE_URL['host'],
+            // 'port' => $DATABASE_URL['port'],
+            // 'database' => ltrim($DATABASE_URL['path'],"/"),
+            // 'username' => $DATABASE_URL['user'],
+            // 'password' => $DATABASE_URL['pass'],
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,

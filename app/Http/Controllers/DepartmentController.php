@@ -23,12 +23,22 @@ class DepartmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $departments = Department::paginate(5);
-
-        return view('department/index', ['departments' => $departments]);
+    public function index(){
+        if(request()->ajax()) {
+        return datatables()->of(Department::select('*'))
+        ->addColumn('action', 'department.action')
+        ->rawColumns(['action'])
+        ->addIndexColumn()
+        ->make(true);
+        }
+    return view('department.index');
     }
+    // public function index()
+    // {
+    //     $departments = Department::paginate(20);
+
+    //     return view('department/index', ['departments' => $departments]);
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -37,7 +47,7 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        return view('department/create');
+        return view('department.create');
     }
 
     /**
@@ -46,15 +56,30 @@ class DepartmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $this->validateInput($request);
-         Department::create([
-            'department' => $request['department']
-        ]);
 
-        return redirect()->intended('department');
+    public function store(Request $request){
+        $request->validate([
+        'name' => 'required',
+        // 'email' => 'required',
+        // 'address' => 'required'
+        ]);
+        $departments = new Department;
+        $departments->name = $request->name;
+        // $company->email = $request->email;
+        // $company->address = $request->address;
+        $departments->save();
+        return redirect()->route('department.index');
+        // ->with('success','Department has been created successfully.');
     }
+    // public function store(Request $request)
+    // {
+    //     $this->validateInput($request);
+    //      Department::create([
+    //         'name' => $request['name']
+    //     ]);
+
+    //     return redirect()->intended('department');
+    // }
 
     /**
      * Display the specified resource.
@@ -62,10 +87,13 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
+    public function show(Department $departments){
+        return view('department.show',compact('departments'));
+    } 
+    // public function show($id)
+    // {
+    //     //
+    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -73,12 +101,16 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $department = Department::findOrFail($id);
 
-        return view('department/edit', ['department' => $department]);
+    public function edit(Department $department){
+        return view('department.edit',compact('department'));
     }
+    // public function edit($id)
+    // {
+    //     $department = Department::findOrFail($id);
+
+    //     return view('department/edit', ['department' => $department]);
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -87,18 +119,34 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        $department = Department::findOrFail($id);
-        $this->validateInput($request);
-        $input = [
-            'department' => $request['department']
-        ];
-        Department::where('id', $id)
-            ->update($input);
-        
-        return redirect()->intended('department');
+    public function update(Request $request, $id){
+        $request->validate([
+        'name' => 'required',
+        // 'email' => 'required',
+        // 'address' => 'required'
+        ]);
+        $departments = Department::find($id);
+        $departments->name = $request->name;
+        // $company->email = $request->email;
+        // $company->address = $request->address;
+        $departments->save();
+        return redirect()->route('department.index');
+        // ->with('success','Department Has Been updated successfully');
     }
+
+
+    // public function update(Request $request, $id)
+    // {
+    //     $department = Department::findOrFail($id);
+    //     $this->validateInput($request);
+    //     $input = [
+    //         'name' => $request['name']
+    //     ];
+    //     Department::where('id', $id)
+    //         ->update($input);
+        
+    //     return redirect()->intended('department');
+    // }
 
     /**
      * Remove the specified resource from storage.
@@ -106,11 +154,17 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        Department::where('id', $id)->delete();
-         return redirect()->intended('department');
+
+    public function destroy(Request $request){
+        $com = Department::where('id',$request->id)->delete();
+        return Response()->json($com);
+        
     }
+    // public function destroy($id)
+    // {
+    //     Department::where('id', $id)->delete();
+    //      return redirect()->intended('department');
+    // }
 
     /**
      * Search department from database base on some specific constraints
@@ -120,7 +174,7 @@ class DepartmentController extends Controller
      */
     public function search(Request $request) {
         $constraints = [
-            'department' => $request['department']
+            'name' => $request['name']
             ];
 
        $departments = $this->doSearchingQuery($constraints);
@@ -142,7 +196,7 @@ class DepartmentController extends Controller
     }
     private function validateInput($request) {
         $this->validate($request, [
-        'department' => 'required|max:60|unique:department'
+        'name' => 'required|max:60|unique:department'
     ]);
     }
 }

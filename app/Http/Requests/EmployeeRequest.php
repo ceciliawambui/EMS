@@ -27,9 +27,9 @@ class EmployeeRequest extends FormRequest
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required|unique:employees',
-            'job_title_id' => 'required',
-            'department_id' => 'required',
-            'salary' => 'required'
+            'job_title_id' => 'required|numeric',
+            'department_id' => 'required|numeric',
+            'salary' => 'required|numeric'
         ];
     }
 }

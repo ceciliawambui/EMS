@@ -24,15 +24,25 @@ class JobTitlesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        // return view('jobtitles.index', [
-        //     'jobtitles' => DB::table('jobtitles')->paginate(5)
-        // ]);
-        $jobs = JobTitle::paginate(5);
-
-        return view('jobtitles/index', ['jobs' => $jobs]);
+    public function index(){
+        if(request()->ajax()) {
+        return datatables()->of(JobTitle::select('*'))
+        ->addColumn('action', 'jobtitles.action')
+        ->rawColumns(['action'])
+        ->addIndexColumn()
+        ->make(true);
+        }
+    return view('jobtitles.index');
     }
+    // public function index()
+    // {
+    //     // return view('jobtitles.index', [
+    //     //     'jobtitles' => DB::table('jobtitles')->paginate(5)
+    //     // ]);
+    //     // $jobs = JobTitle::paginate(20);
+
+    //     return view('jobtitles/index', ['jobs' => $jobs]);
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -41,7 +51,7 @@ class JobTitlesController extends Controller
      */
     public function create()
     {
-        return view('jobtitles/create');
+        return view('jobtitles.create');
     }
 
     /**
@@ -50,15 +60,29 @@ class JobTitlesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $this->validateInput($request);
-         JobTitle::create([
-            'jobtitle' => $request['jobtitle']
+    public function store(Request $request){
+        $request->validate([
+        'name' => 'required',
+        // 'email' => 'required',
+        // 'address' => 'required'
         ]);
-
-        return redirect()->intended('jobtitles');
+        $jobtitle = new JobTitle;
+        $jobtitle->name = $request->name;
+        // $company->email = $request->email;
+        // $company->address = $request->address;
+        $jobtitle->save();
+        return redirect()->route('jobtitles.index');
+        // ->with('success','Job Title has been created successfully.');
     }
+    // public function store(Request $request)
+    // {
+    //     $this->validateInput($request);
+    //      JobTitle::create([
+    //         'name' => $request['name']
+    //     ]);
+
+    //     return redirect()->intended('jobtitles');
+    // }
 
     /**
      * Display the specified resource.
@@ -66,10 +90,13 @@ class JobTitlesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
+    // public function show($id)
+    // {
+    //     //
+    // }
+    public function show(JobTitle $jobtitle){
+        return view('jobtitles.show',compact('jobtitle'));
+    } 
 
     /**
      * Show the form for editing the specified resource.
@@ -77,12 +104,15 @@ class JobTitlesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $jobtitles = JobTitle::findOrFail($id);
-
-        return view('jobtitles/edit', ['jobtitles' => $jobtitles]);
+    public function edit(JobTitle $jobtitle){
+        return view('jobtitles.edit',compact('jobtitle'));
     }
+    // public function edit($id)
+    // {
+    //     $jobtitles = JobTitle::findOrFail($id);
+
+    //     return view('jobtitles/edit', ['jobtitles' => $jobtitles]);
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -91,18 +121,32 @@ class JobTitlesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        $jobtitles = JobTitle::findOrFail($id);
-        $this->validateInput($request);
-        $input = [
-            'jobtitle' => $request['jobtitle']
-        ];
-        JobTitle::where('id', $id)
-            ->update($input);
-        
-        return redirect()->intended('jobtitles');
+    public function update(Request $request, $id){
+        $request->validate([
+        'name' => 'required',
+        // 'email' => 'required',
+        // 'address' => 'required'
+        ]);
+        $jobtitle = JobTitle::find($id);
+        $jobtitle->name = $request->name;
+        // $company->email = $request->email;
+        // $company->address = $request->address;
+        $jobtitle->save();
+        return redirect()->route('jobtitles.index');
+        // ->with('success','Job Title Has Been updated successfully');
     }
+    // public function update(Request $request, $id)
+    // {
+    //     $jobtitles = JobTitle::findOrFail($id);
+    //     $this->validateInput($request);
+    //     $input = [
+    //         'name' => $request['name']
+    //     ];
+    //     JobTitle::where('id', $id)
+    //         ->update($input);
+        
+    //     return redirect()->intended('jobtitles');
+    // }
 
     /**
      * Remove the specified resource from storage.
@@ -110,11 +154,17 @@ class JobTitlesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        JobTitle::where('id', $id)->delete();
-        return redirect()->intended('jobtitles');
+
+    public function destroy(Request $request){
+        $com = JobTitle::where('id',$request->id)->delete();
+        return Response()->json($com);
+        
     }
+    // public function destroy($id)
+    // {
+    //     JobTitle::where('id', $id)->delete();
+    //     return redirect()->intended('jobtitles');
+    // }
 
     /**
      * Search department from database base on some specific constraints
@@ -124,7 +174,7 @@ class JobTitlesController extends Controller
      */
     public function search(Request $request) {
         $constraints = [
-            'jobtitle' => $request['jobtitle']
+            'name' => $request['name']
             ];
 
        $jobs = $this->doSearchingQuery($constraints);
@@ -132,7 +182,7 @@ class JobTitlesController extends Controller
     }
 
     private function doSearchingQuery($constraints) {
-        $query = jobtitle::query();
+        $query = name::query();
         $fields = array_keys($constraints);
         $index = 0;
         foreach ($constraints as $constraint) {
@@ -146,7 +196,7 @@ class JobTitlesController extends Controller
     }
     private function validateInput($request) {
         $this->validate($request, [
-        'jobtitle' => 'required|max:60|unique:jobtitles'
+        'name' => 'required|max:60|unique:jobtitles'
     ]);
     }
 }

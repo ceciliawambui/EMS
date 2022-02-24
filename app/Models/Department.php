@@ -9,7 +9,8 @@ class Department extends Model
 {
     use HasFactory;
     protected $table = 'department';
-    protected $fillable = ['id','department'];
+    
+    protected $fillable = ['name'];
 
     // relationship, one to many
     // one department hads many employees
