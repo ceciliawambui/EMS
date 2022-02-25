@@ -1,14 +1,45 @@
+@extends('layouts.base')
+@extends('jobtitles.base')
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>Edit Job Title</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
+<style>
+    body {
+        font-family: 'Times New Roman', serif;
+    }
+    </style>
 </head>
 <body>
-<div class="container mt-2">
+<div class="container"style="margin-top:100px">
 <div class="row">
-<div class="col-lg-12 margin-tb">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <h4>Edit Job Title</h4>
+        <a class="btn btn-success" href="{{ route('jobtitles.index') }}" enctype="multipart/form-data"> Back</a>
+        @if(session('status'))
+<div class="alert alert-success mb-1 mt-1">
+{{ session('status') }}
+</div>
+@endif
+<form action="{{ route('jobtitles.update',$jobtitle->id) }}" method="POST" enctype="multipart/form-data">
+@csrf
+@method('PUT')
+<div class="form-group">
+    <strong>Job Title:</strong>
+    <input type="text" name="name" value="{{ $jobtitle->name }}" class="form-control" placeholder="Job Title">
+    @error('name')
+    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+    @enderror
+    </div>
+    <button type="submit" class="btn btn-success">Update</button>
+    </div>
+    <div class="col-md-4"></div>
+  
+{{-- <div class="col-lg-12 margin-tb">
 <div class="pull-left">
 <h2>Edit Job Title</h2>
 </div>
@@ -38,10 +69,12 @@
 <button type="submit" class="btn btn-primary ml-3">Update</button>
 </div>
 </form>
+</div> --}}
+</form>
 </div>
 </body>
 </html>
-
+@endsection
 
 
 {{-- @extends('layouts.base')

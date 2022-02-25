@@ -1,14 +1,47 @@
+@extends('layouts.base')
+@extends('jobtitles.base')
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>Add Job Title</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
+<style>
+        body {
+        font-family: 'Times New Roman', serif;
+    }
+</style>
 </head>
 <body>
-<div class="container mt-2">
+<div class="container"style="margin-top:100px">
 <div class="row">
-<div class="col-lg-12 margin-tb">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <h4>Add Job Title</h4>
+        <a class="btn btn-success" href="{{ route('jobtitles.index') }}"> Back</a>
+        @if(session('status'))
+<div class="alert alert-success mb-1 mt-1">
+{{ session('status') }}
+</div>
+@endif
+<form action="{{ route('jobtitles.store') }}" method="POST" enctype="multipart/form-data">
+@csrf
+<div class="form-group">
+    <strong>Job Title:</strong>
+    <input type="text" name="name" class="form-control" placeholder="Job Title ">
+    @error('name')
+    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+    @enderror
+    <div>
+        
+    </div>
+  
+
+    </div>
+    <div class="col-md-4"></div>
+    <button type="submit" class="btn btn-success">Create</button>
+{{-- <div class="col-lg-12 margin-tb">
 <div class="pull-left mb-2">
 <h2>Add Job Title</h2>
 </div>
@@ -37,9 +70,10 @@
 
 <button type="submit" class="btn btn-primary ml-3">Create</button>
 </div>
-</form>
+</form> --}}
 </body>
 </html>
+@endsection
 
 
 

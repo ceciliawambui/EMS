@@ -16,18 +16,18 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link  href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-
+<style>
+    body {
+        font-family: 'Times New Roman', serif;
+    }
+    </style>
 
 
 </head>
 <body>
 <div class="container" style="margin-top: 50px">
 <div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-        <h2 style="text-align: center">Job Titles</h2>
-    </div>
-    <div class="col-md-4"></div>
+<h2 style="text-align: center">Job Titles</h2>
 
 </div>
 <div class="row">
@@ -38,8 +38,7 @@
     <div class="col-md-2"></div>
 
 </div>
-</div>
-</div>
+
 
 @if ($message = Session::get('success'))
 <div class="alert alert-success">
