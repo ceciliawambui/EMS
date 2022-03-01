@@ -32,6 +32,7 @@ class EmployeesController extends Controller
     public function index(Request $request)
     {
         if(request()->ajax()) {
+
             $employees = Employee::with(['department', 'jobTitle']);
 
             return datatables()->of($employees)

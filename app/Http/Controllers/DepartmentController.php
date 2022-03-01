@@ -23,15 +23,40 @@ class DepartmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
+    public function index(Request $request){
         if(request()->ajax()) {
-        return datatables()->of(Department::select('*'))
-        ->addColumn('action', 'department.action')
-        ->rawColumns(['action'])
-        ->addIndexColumn()
-        ->make(true);
+            $departments = Department::query();
+            return datatables()->of($departments)
+                ->filter(function($query) use($request){
+                    $query->when($request->trashed == 1, function($trashedDepartments){
+                        $trashedDepartments->onlyTrashed();
+                    });
+                })      
+                ->addColumn('action', function($departments) use($request) {
+                    return view('department.action', [
+                        'id' => $departments->id,
+                        'trashed' => $request->trashed,
+                    ]);
+                })
+                ->rawColumns(['action'])
+                ->addIndexColumn()
+                ->make(true);
         }
-    return view('department.index');
+           
+        return view('department.index');
+    }
+    public function restore($id ) 
+    {
+        // Employee::withTrashed()->find($id)->restore();
+        Department::where('id', $id)->withTrashed()->restore();
+
+        return redirect()->route('department.index');
+    }
+    public function forceDelete($id) 
+    {
+        Department::where('id', $id)->onlyTrashed()->forceDelete();
+
+        return redirect()->route('department.index');
     }
     // public function index()
     // {

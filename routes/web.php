@@ -26,10 +26,20 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('department', 'App\Http\Controllers\DepartmentController');
 Route::post('department/search', 'App\Http\Controllers\DepartmentController@search')->name('department.search');
 Route::post('delete-department', 'App\Http\Controllers\DepartmentController@destroy');
+Route::get('department/restore/{id}', 'App\Http\Controllers\DepartmentController@restore')->name('department.restore');
+Route::get('department/forceDelete/{id}', 'App\Http\Controllers\DepartmentController@forceDelete')->name('department.forceDelete');
+Route::get('department/restore-all', 'App\Http\Controllers\DepartmentController@restoreAll')->name('department.restoreAll');
+
+
+
 
 Route::resource('jobtitles', 'App\Http\Controllers\JobTitlesController');
 Route::post('jobtitles/search', 'App\Http\Controllers\JobTitlesController@search')->name('jobtitles.search');
 Route::post('delete-jobtitle', 'App\Http\Controllers\JobTitlesController@destroy');
+Route::get('jobtitles/restore/{id}', 'App\Http\Controllers\DepartmentController@restore')->name('jobtitles.restore');
+Route::get('jobtitles/forceDelete/{id}', 'App\Http\Controllers\DepartmentController@forceDelete')->name('jobtitles.forceDelete');
+Route::get('jobtitles/restore-all', 'App\Http\Controllers\DepartmentController@restoreAll')->name('jobtitles.restoreAll');
+
 
 
 Route::resource('employees', 'App\Http\Controllers\EmployeesController');

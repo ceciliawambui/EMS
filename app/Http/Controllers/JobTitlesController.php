@@ -24,15 +24,28 @@ class JobTitlesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
+    public function index(Request $request){
         if(request()->ajax()) {
-        return datatables()->of(JobTitle::select('*'))
-        ->addColumn('action', 'jobtitles.action')
-        ->rawColumns(['action'])
-        ->addIndexColumn()
-        ->make(true);
-        }
-    return view('jobtitles.index');
+            $jobtitle = JobTitle::query();
+            return datatables()->of($jobtitle)
+            ->filter(function($query) use($request){
+                $query->when($request->trashed == 1, function($trashedJobtitles){
+                    $trashedJobtitles->onlyTrashed();
+                });
+            })
+            ->addColumn('action', function($jobtitle) use($request) {
+                return view('jobtitles.action', [
+                    'id' => $jobtitle->id,
+                    'trashed' => $request->trashed,
+                ]);
+
+            })
+        
+            ->rawColumns(['action'])
+            ->addIndexColumn()
+            ->make(true);
+            }
+        return view('jobtitles.index');
     }
     // public function index()
     // {

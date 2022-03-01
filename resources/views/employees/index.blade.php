@@ -48,7 +48,7 @@
                         </div>
                         <div class="col-md-3 ">
                             <form name="viewTrashed" class="d-flex">
-                                <select name="trashed" id="trashed"  class="form-control mr-2">
+                                <select name="trashed" id="trashed" class="form-control mr-2">
                                     <option value="">View Employees</option>
                                     <option value="1">View Trashed</option>
                                 </select>
@@ -57,7 +57,7 @@
                             </form>
                         </div>
 
-                    </div>         
+                    </div>
                 </div>
             </div>
             @if ($message = Session::get('success'))
@@ -101,7 +101,7 @@
                 serverSide: true,
                 ajax: {
                     url: "{{ url('employees') }}",
-                    data: function(filter){
+                    data: function(filter) {
                         filter.trashed = $('#trashed').val()
                     }
                 },
@@ -140,7 +140,7 @@
                 ]
             });
 
-            $('#filterTrashed').click(function(){
+            $('#filterTrashed').click(function() {
                 $('#datatable-crud').DataTable().draw(true)
             })
 
