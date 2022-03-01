@@ -43,7 +43,7 @@
 
                     </div>
                     <div class="row">
-                        <div class="col-md-5 offset-md-2">
+                        <div class="col-md-7 offset-md-2">
                             <a class="btn btn-success" href="{{ route('employees.create') }}"> Create Employee</a>
                         </div>
                         <div class="col-md-3 ">
@@ -57,7 +57,7 @@
                             </form>
                         </div>
 
-                    </div>
+                    </div>         
                 </div>
             </div>
             @if ($message = Session::get('success'))
@@ -72,10 +72,10 @@
                         <table class="table table-bordered" id="datatable-crud">
                             <thead>
                                 <tr>
-                                    <th width="50px">First Name</th>
-                                    <th width="50px">Last Name</th>
+                                    <th width="60px">First Name</th>
+                                    <th width="60px">Last Name</th>
                                     <th width="150px">Email</th>
-                                    <th width="50px">Job Title</th>
+                                    <th width="60px">Job Title</th>
                                     <th width="100px">Department</th>
                                     <th width="50px">Salary</th>
                                     <th>Action</th>

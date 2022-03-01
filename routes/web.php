@@ -37,7 +37,10 @@ Route::post('employees/search', 'App\Http\Controllers\EmployeesController@search
 Route::post('delete-employee', 'App\Http\Controllers\EmployeesController@destroy');
 
 Route::get('employees/restore/{id}', 'App\Http\Controllers\EmployeesController@restore')->name('employees.restore');
+Route::get('employees/forceDelete/{id}', 'App\Http\Controllers\EmployeesController@forceDelete')->name('employees.forceDelete');
 Route::get('employees/restore-all', 'App\Http\Controllers\EmployeesController@restoreAll')->name('employees.restoreAll');
+
+Route::get('employees/softDelete', 'App\Http\Controllers\EmployeesController@softDelete')->name('employees.softDelete');
 
 
 

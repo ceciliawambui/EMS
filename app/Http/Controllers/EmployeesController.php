@@ -37,7 +37,7 @@ class EmployeesController extends Controller
             return datatables()->of($employees)
                 ->filter(function($query) use($request){
                     $query->when($request->trashed == 1, function($trashedEmployees){
-                        $trashedEmployees->withTrashed();
+                        $trashedEmployees->onlyTrashed();
                     });
                 })
                 ->editColumn('job_title', function($employee){
@@ -49,8 +49,10 @@ class EmployeesController extends Controller
                 ->addColumn('action', function($employee) use($request) {
                     return view('employees.action', [
                         'id' => $employee->id,
-                        'trashed' => $request->trashed
+                        'trashed' => $request->trashed,
+                     
                     ]);
+      
                 })
                 ->rawColumns(['action'])
                 ->addIndexColumn()
@@ -59,54 +61,19 @@ class EmployeesController extends Controller
 
         return view('employees.index');
     }
-    public function archive(){
-        // $employees = Employee::latest();
-
-        // if($this->get('status') == 'archived') {
-        //     $employees = $employees->onlyTrashed();
-        // }
-
-        if(request()->ajax()) {
-            
-            $employees = Employee::with(['department', 'jobTitle']);
-            // get only trashed
-            if ($request->has('trashed')) {
-                $employees = Post::onlyTrashed()
-                    ->get();
-            } else {
-                $employees = Employee::get();
-            }
-
-            // $employees = Employee::onlyTrashed()->get();
-
-            return datatables()->of($employees)
-                ->editColumn('job_title', function($employee){
-                    return $employee->jobTitle?->name ?? "NA";
-                })
-                ->editColumn('department', function($employee){
-                    return $employee->department?->name ?? "NA";
-                })
-                ->addColumn('action', 'employees.action')
-                ->rawColumns(['action'])
-                ->addIndexColumn()
-                ->make(true);
-        }
-
-        return view('employees.archive');
-    }
-    public function restore($id) 
+    public function restore($id ) 
     {
+        // Employee::withTrashed()->find($id)->restore();
         Employee::where('id', $id)->withTrashed()->restore();
 
         return redirect()->route('employees.index');
     }
-    // public function forceDelete($id) 
-    // {
-    //     Employee::where('id', $id)->withTrashed()->forceDelete();
+    public function forceDelete($id) 
+    {
+        Employee::where('id', $id)->onlyTrashed()->forceDelete();
 
-    //     return redirect()->route('employees.index', ['status' => 'archived'])
-    //         ->withSuccess(__('Employee force deleted successfully.'));
-    // }
+        return redirect()->route('employees.index');
+    }
     public function restoreAll() 
     {
         Employee::onlyTrashed()->restore();
