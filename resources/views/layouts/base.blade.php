@@ -6,7 +6,7 @@
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
                 class="fas fa-bars"></i></button>
-                <h3 style="color:white">Employee Management System</h3>
+           
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
             <!-- <div class="input-group">
@@ -22,11 +22,7 @@
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
                     aria-expanded="false"><i class="fas fa-user fa-fw"></i> {{ auth()->user()->name }}</a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <!-- <li><a class="dropdown-item" href="#!">Settings</a></li>
-                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-                    <li>
-                        <hr class="dropdown-divider" />
-                    </li> -->
+                
                     <li>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -45,7 +41,34 @@
         <div id="layoutSidenav_nav">
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
-                    <div class="nav">
+                    <div class="sb-sidenav-menu-heading">EMS</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('home') }}">
+                              <span class="menu-title" style="margin-right:100px">Dashboard</span>
+                              <i class="fas fa-tachometer-alt"></i>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="{{ url('jobtitles') }}">
+                              <span class="menu-title"  style="margin-right:110px">Job Titles</span>
+                              <i class="fa fa-address-book"></i>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="{{ url('department') }}">
+                              <span class="menu-title"  style="margin-right:85px">Departments</span>
+                              <i class="fa fa-sitemap"></i>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="{{ url('employees') }}">
+                              <span class="menu-title"  style="margin-right:95px">Employees</span>
+                              <i class="fa fa-users"></i>
+                            </a>
+                          </li>
+                    </ul>
+                    {{-- <div class="nav">
                         <div class="sb-sidenav-menu-heading">EMS</div>
                         <a class="nav-link" href="{{ url('home') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
@@ -64,7 +87,7 @@
                             Employees
                         </a>
 
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Logged in as:</div>

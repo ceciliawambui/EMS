@@ -27,115 +27,131 @@
 
     </head>
 
-    <body>
-        <div class="container" style="margin-top: 50px">
-            <div class="row">
+    <body class="sb-nav-fixed">
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_content">
+                @yield('content')
+                <main>
+                    <div class="container-xxl">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div>
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                          <li class="breadcrumb-item active" aria-current="page">Departments</li>
+                                        </ol>
+                                      </nav>
+                                  
+                                </div>
+                                <div class="grid grid-cols-4 gap-4">
+                                    <div><a class="btn btn-success btn-sm" href="{{ route('department.create') }}"> Create
+                                            Department</a></div>
 
-                <h2 style="text-align: center">Departments</h2>
+
+                                    <div></div>
+                                    <div></div>
+                                    <div>
+                                        <form name="viewTrashed" class="d-flex">
+                                            <select name="trashed" id="trashed" class="form-control mr-2">
+                                                <option value="">View Departments</option>
+                                                <option value="1">View Trashed</option>
+                                            </select>
+
+                                            <button type="button" id="filterTrashed"
+                                                class="btn btn-sm btn-success btn-sm">Filter</button>
+                                        </form>
+
+                                    </div>
+
+                                    @if ($message = Session::get('success'))
+                                        <div class="alert alert-success">
+                                            <p>{{ $message }}</p>
+                                        </div>
+                                    @endif
+
+                                </div>
+
+                                <table class="table table-bordered" id="datatable-crud" style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Job Title</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
             </div>
-            <div class="row">
-                <div class="col-md-5 offset-md-2">
-                    <a class="btn btn-success" href="{{ route('department.create') }}"> Create Department</a>
-                </div>
-                <div class="col-md-3 ">
-                    <form name="viewTrashed" class="d-flex">
-                        <select name="trashed" id="trashed"  class="form-control mr-2">
-                            <option value="">View Departments</option>
-                            <option value="1">View Trashed</option>
-                        </select>
 
-                        <button type="button" id="filterTrashed" class="btn btn-sm btn-success">Filter</button>
-                    </form>
-                </div>
-
-            </div> 
-
-            @if ($message = Session::get('success'))
-                <div class="alert alert-success">
-                    <p>{{ $message }}</p>
-                </div>
-            @endif
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-2">
-
-                    </div>
-                    <div class="col-md-8">
-                        <table class="table table-bordered" id="datatable-crud">
-                            <thead>
-                                <tr>
-                                    <th>Department</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                        </table>
-
-                    </div>
-                    <div class="col-md-2">
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </body>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $('#datatable-crud').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: {
-                    url: "{{ url('department') }}",
-                    data: function(value){
-                        value.trashed = $("#trashed").val()
-                    }
-                },
-                columns: [
-                    {
-                        data: 'name',
-                        name: 'name'
-                    },
-
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: false
-                    },
-                ],
-                order: [
-                    [0, 'desc']
-                ]
-            });
-
-            $('body').on('click', '.delete', function() {
-                if (confirm("Delete Record?") == true) {
-                    var id = $(this).data('id');
-                    // ajax
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ url('delete-department') }}",
-                        data: {
-                            id: id
-                        },
-                        dataType: 'json',
-                        success: function(res) {
-                            var oTable = $('#datatable-crud').dataTable();
-                            oTable.fnDraw(false);
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }
                     });
-                }
-            });
+                    $('#datatable-crud').DataTable({
+                        processing: true,
+                        serverSide: true,
+                        responsive: true,
+                        ajax: {
+                            url: "{{ url('department') }}",
+                            data: function(value) {
+                                value.trashed = $("#trashed").val()
+                            }
+                        },
+                        columns: [{
+                                data: 'name',
+                                name: 'name'
+                            },
 
-            $('#filterTrashed').click(function(){
-                $('#datatable-crud').DataTable().draw(true)
-            })
-        });
-    </script>
+                            {
+                                data: 'action',
+                                name: 'action',
+                                orderable: false
+                            },
+                        ],
+                        order: [
+                            [0, 'desc']
+                        ]
+                    });
+
+                    $('body').on('click', '.delete', function() {
+                        if (confirm("Delete Record?") == true) {
+                            var id = $(this).data('id');
+                            // ajax
+                            $.ajax({
+                                type: "POST",
+                                url: "{{ url('delete-department') }}",
+                                data: {
+                                    id: id
+                                },
+                                dataType: 'json',
+                                success: function(res) {
+                                    var oTable = $('#datatable-crud').dataTable();
+                                    oTable.fnDraw(false);
+                                }
+                            });
+                        }
+                    });
+
+                    $('#filterTrashed').click(function() {
+                        $('#datatable-crud').DataTable().draw(true)
+                    })
+                });
+            </script>
+
+    </html>
+
+
+    </main>
+
+    </div>
+    </div>
+
+    </body>
 
     </html>
 @endsection

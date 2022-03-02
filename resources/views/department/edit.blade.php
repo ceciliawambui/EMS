@@ -22,7 +22,7 @@
     </style>
 </head>
 <style>
-    
+
 </style>
 <body>
 <div class="container">
@@ -32,7 +32,7 @@
     </div>
     <div class="col-md-4" style="margin-top:100px">
         <h4>Edit Department</h4>
-        <a class="btn btn-success" href="{{ route('department.index') }}" enctype="multipart/form-data"> Back</a>
+        <a class="btn btn-success btn-sm" href="{{ route('department.index') }}" enctype="multipart/form-data"> Back</a>
         @if(session('status'))
 <div class="alert alert-success mb-1 mt-1">
 {{ session('status') }}
@@ -48,7 +48,7 @@
     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
     @enderror
     </div>
-    <button type="submit" class="btn btn-success">Update</button>
+    <button type="submit" class="btn btn-success btn-sm">Update</button>
 
     </div>
     <div class="col-md-4">

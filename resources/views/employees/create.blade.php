@@ -93,7 +93,7 @@
             <option value="{{$jobtitle->id}}">{{$jobtitle->name}}</option>
             @endforeach
         </select>
-        
+
         @if ($errors->has('job_title_id'))
         <span class="help-block">
             <strong>{{ $errors->first('job_title_id') }}</strong>
@@ -119,7 +119,7 @@
 
 
     </div>
-    <button type="submit" class="btn btn-success ml-3">Create</button>
+    <button type="submit" class="btn btn-success ml-3  btn-sm">Create</button>
     <div class="col-md-2"></div>
 {{-- <div class="col-lg-12 margin-tb">
 <div class="pull-left mb-2">
@@ -209,7 +209,7 @@
                 <option value="{{$jobtitle->id}}">{{$jobtitle->name}}</option>
                 @endforeach
             </select>
-            
+
             @if ($errors->has('job_title_id'))
             <span class="help-block">
                 <strong>{{ $errors->first('job_title_id') }}</strong>
@@ -347,7 +347,7 @@
                                 <option value="{{$jobtitle->id}}">{{$jobtitle->name}}</option>
                                 @endforeach
                             </select>
-                            
+
                             @if ($errors->has('job_title_id'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('job_title_id') }}</strong>

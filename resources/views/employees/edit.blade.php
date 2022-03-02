@@ -37,7 +37,7 @@
             @endif
         </div>
     </div>
-    
+
 
     <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
         <label for="name" class="col-md-4 control-label">Last Name</label>
@@ -95,7 +95,7 @@
             <option value="{{$jobtitle->id}}" {{{$jobtitle->id ==$employee->job_title_id ? "selected": "" }}}>{{$jobtitle->name}}</option>
             @endforeach
         </select>
-        
+
         @if ($errors->has('job_title_id'))
         <span class="help-block">
             <strong>{{ $errors->first('job_title_id') }}</strong>
@@ -116,14 +116,14 @@
             </span>
             @endif
         </div>
-    </div> 
-
-
-        <button type="submit" class="btn btn-success ml-3">Update</button>
     </div>
-    
+
+
+        <button type="submit" class="btn btn-success ml-3 btn-sm">Update</button>
+    </div>
+
     <div class="col-md-2"></div>
-  
+
 {{-- <div class="col-lg-12 margin-tb">
 <div class="pull-left">
 <h2>Edit Employee</h2>
@@ -156,7 +156,7 @@
             @endif
         </div>
     </div>
-    
+
 
     <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
         <label for="name" class="col-md-4 control-label">Last Name</label>
@@ -214,7 +214,7 @@
             <option value="{{$jobtitle->id}}" {{{$jobtitle->id ==$employee->job_title_id ? "selected": "" }}}>{{$jobtitle->name}}</option>
             @endforeach
         </select>
-        
+
         @if ($errors->has('job_title_id'))
         <span class="help-block">
             <strong>{{ $errors->first('job_title_id') }}</strong>
@@ -346,7 +346,7 @@
                                 <option value="{{$jobtitle->id}}" {{{$jobtitle->id ==$employees->job_title_id ? "selected": "" }}}>{{$jobtitle->name}}</option>
                                 @endforeach
                             </select>
-                            
+
                             @if ($errors->has('job_title_id'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('job_title_id') }}</strong>

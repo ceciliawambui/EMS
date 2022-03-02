@@ -19,7 +19,7 @@
     <div class="col-md-4"></div>
     <div class="col-md-4"  style="margin-top:100px">
         <h4>Add Department</h4>
-        <a class="btn btn-success" href="{{ route('department.index') }}"> Back</a>
+        <a class="btn btn-success btn-sm" href="{{ route('department.index') }}"> Back</a>
         @if(session('status'))
 <div class="alert alert-success mb-1 mt-1">
 {{ session('status') }}
@@ -36,8 +36,8 @@
 
     </div>
     <div class="col-md-4"></div>
-    
-<button type="submit" class="btn btn-success">Create</button>
+
+<button type="submit" class="btn btn-success btn-sm">Create</button>
 
 {{-- <div class="col-lg-12 margin-tb">
 <div class="pull-left mb-2">
