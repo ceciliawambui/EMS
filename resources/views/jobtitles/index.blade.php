@@ -21,7 +21,19 @@
             body {
                 font-family: 'Times New Roman', serif;
             }
-
+            .btn-group-xs>.btn,
+            .btn-xs {
+                padding: .35rem .5rem;
+                font-size: .875rem;
+                line-height: .5;
+                border-radius: .2rem;
+            }
+            .table.dataTable td {
+                padding: 3px;
+            }
+            .table.dataTable th {
+                padding: 3px;
+            }
         </style>
 
 
@@ -60,7 +72,7 @@
                                             </select>
 
                                             <button type="button" id="filterTrashed"
-                                                class="btn btn-sm btn-success btn-sm">Filter</button>
+                                                class="btn btn-sm btn-success btn-xs">Filter</button>
                                         </form>
 
                                     </div>
@@ -104,21 +116,23 @@
                                 value.trashed = $("#trashed").val()
                             }
                         },
-                        columns: [
+                        "autoWidth": false, // might need this
 
+                        columns: [
 
                             {
                                 data: 'name',
                                 name: 'name',
-                                padding: '2px'
+
                             },
                             {
                                 data: 'action',
                                 name: 'action',
                                 orderable: false,
-                                padding: '2px'
+
                             },
                         ],
+
                         order: [
                             [0, 'desc']
                         ]
@@ -141,6 +155,8 @@
                             });
                         }
                     });
+                    $('.dataTables_filter input[type="search"]')
+                     .attr('placeholder','  Search...')
                     $('#filterTrashed').click(function() {
                         $('#datatable-crud').DataTable().draw(true)
                     })

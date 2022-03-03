@@ -40,12 +40,25 @@ class JobTitlesController extends Controller
                 ]);
 
             })
-        
+
             ->rawColumns(['action'])
             ->addIndexColumn()
             ->make(true);
             }
         return view('jobtitles.index');
+    }
+    public function restore($id )
+    {
+       
+        JobTitle::where('id', $id)->withTrashed()->restore();
+
+        return redirect()->route('jobtitles.index');
+    }
+    public function forceDelete($id)
+    {
+        JobTitle::where('id', $id)->onlyTrashed()->forceDelete();
+
+        return redirect()->route('jobtitles.index');
     }
     // public function index()
     // {
@@ -109,7 +122,7 @@ class JobTitlesController extends Controller
     // }
     public function show(JobTitle $jobtitle){
         return view('jobtitles.show',compact('jobtitle'));
-    } 
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -157,7 +170,7 @@ class JobTitlesController extends Controller
     //     ];
     //     JobTitle::where('id', $id)
     //         ->update($input);
-        
+
     //     return redirect()->intended('jobtitles');
     // }
 
@@ -171,7 +184,7 @@ class JobTitlesController extends Controller
     public function destroy(Request $request){
         $com = JobTitle::where('id',$request->id)->delete();
         return Response()->json($com);
-        
+
     }
     // public function destroy($id)
     // {

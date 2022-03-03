@@ -36,9 +36,9 @@ Route::get('department/restore-all', 'App\Http\Controllers\DepartmentController@
 Route::resource('jobtitles', 'App\Http\Controllers\JobTitlesController');
 Route::post('jobtitles/search', 'App\Http\Controllers\JobTitlesController@search')->name('jobtitles.search');
 Route::post('delete-jobtitle', 'App\Http\Controllers\JobTitlesController@destroy');
-Route::get('jobtitles/restore/{id}', 'App\Http\Controllers\DepartmentController@restore')->name('jobtitles.restore');
-Route::get('jobtitles/forceDelete/{id}', 'App\Http\Controllers\DepartmentController@forceDelete')->name('jobtitles.forceDelete');
-Route::get('jobtitles/restore-all', 'App\Http\Controllers\DepartmentController@restoreAll')->name('jobtitles.restoreAll');
+Route::get('jobtitles/restore/{id}', 'App\Http\Controllers\JobTitlesController@restore')->name('jobtitles.restore');
+Route::get('jobtitles/forceDelete/{id}', 'App\Http\Controllers\JobTitlesController@forceDelete')->name('jobtitles.forceDelete');
+Route::get('jobtitles/restore-all', 'App\Http\Controllers\JobTitlesController@restoreAll')->name('jobtitles.restoreAll');
 
 
 
@@ -57,14 +57,14 @@ Route::get('employees/softDelete', 'App\Http\Controllers\EmployeesController@sof
 
 
 Route::get('send-email', function () {
-   
+
     $details = [
         'title' => 'Mail from Sky Technologies',
         'body' => 'Congratulations! Welcome to Sky Technologies. '
     ];
-   
+
     \Mail::to('wambuicecilia36@gmail.com')->send(new \App\Mail\NotifyMail($details));
-   
+
     dd("Email is Sent.");
 });
 

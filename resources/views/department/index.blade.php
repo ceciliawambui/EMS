@@ -22,6 +22,20 @@
                 font-family: 'Times New Roman', serif;
             }
 
+            .btn-group-xs>.btn,
+            .btn-xs {
+                padding: .35rem .5rem;
+                font-size: .875rem;
+                line-height: .5;
+                border-radius: .2rem;
+            }
+            .table.dataTable td {
+                padding: 3px;
+            }
+            .table.dataTable th {
+                padding: 3px;
+            }
+
         </style>
 
 
@@ -38,10 +52,10 @@
                                 <div>
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
-                                          <li class="breadcrumb-item active" aria-current="page">Departments</li>
+                                            <li class="breadcrumb-item active" aria-current="page">Departments</li>
                                         </ol>
-                                      </nav>
-                                  
+                                    </nav>
+
                                 </div>
                                 <div class="grid grid-cols-4 gap-4">
                                     <div><a class="btn btn-success btn-sm" href="{{ route('department.create') }}"> Create
@@ -52,13 +66,13 @@
                                     <div></div>
                                     <div>
                                         <form name="viewTrashed" class="d-flex">
-                                            <select name="trashed" id="trashed" class="form-control mr-2">
+                                            <select name="trashed" id="trashed" class="form-control mr-2 size=10">
                                                 <option value="">View Departments</option>
                                                 <option value="1">View Trashed</option>
                                             </select>
 
                                             <button type="button" id="filterTrashed"
-                                                class="btn btn-sm btn-success btn-sm">Filter</button>
+                                                class="btn btn-sm btn-success btn-xs">Filter</button>
                                         </form>
 
                                     </div>
@@ -74,7 +88,7 @@
                                 <table class="table table-bordered" id="datatable-crud" style="width: 100%">
                                     <thead>
                                         <tr>
-                                            <th>Job Title</th>
+                                            <th>Department</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -102,6 +116,7 @@
                                 value.trashed = $("#trashed").val()
                             }
                         },
+                        
                         columns: [{
                                 data: 'name',
                                 name: 'name'
@@ -136,6 +151,8 @@
                             });
                         }
                     });
+                    $('.dataTables_filter input[type="search"]')
+                     .attr('placeholder','  Search...')
 
                     $('#filterTrashed').click(function() {
                         $('#datatable-crud').DataTable().draw(true)

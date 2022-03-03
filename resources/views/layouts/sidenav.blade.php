@@ -61,7 +61,7 @@
             @yield('content')
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4"style="font-size:40px">Dashboard</h1>
+                    <h1 class="mt-4"style="font-size:40px">Dashboard <i class="fas fa-tachometer-alt"></i> </h1>
                     <div class="row">
                         <div class="col-md-4">
                             <div
