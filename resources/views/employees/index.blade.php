@@ -1,7 +1,6 @@
  @extends('layouts.base')
  @extends('jobtitles.base')
  @section('content')
-
      <!DOCTYPE html>
      <html lang="en">
 
@@ -22,19 +21,22 @@
              body {
                  font-family: 'Times New Roman', serif;
              }
+
              .btn-group-xs>.btn,
-            .btn-xs {
-                padding: .35rem .5rem;
-                font-size: .875rem;
-                line-height: .5;
-                border-radius: .2rem;
-            }
-            .table.dataTable td {
-                padding: 3px;
-            }
-            .table.dataTable th {
-                padding: 3px;
-            }
+             .btn-xs {
+                 padding: .35rem .5rem;
+                 font-size: .875rem;
+                 line-height: .5;
+                 border-radius: .2rem;
+             }
+
+             .table.dataTable td {
+                 padding: 3px;
+             }
+
+             .table.dataTable th {
+                 padding: 3px;
+             }
 
          </style>
 
@@ -48,11 +50,11 @@
                      <div class="container-fluid">
                          <div class="row">
                              <div class="col-lg-12">
-                                <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                      <li class="breadcrumb-item active" aria-current="page">Employees</li>
-                                    </ol>
-                                  </nav>
+                                 <nav aria-label="breadcrumb">
+                                     <ol class="breadcrumb">
+                                         <li class="breadcrumb-item active" aria-current="page">Employees</li>
+                                     </ol>
+                                 </nav>
                                  <div class="grid grid-cols-4 gap-4">
                                      <div><a class="btn btn-success btn-sm" href="{{ route('employees.create') }}"> Create
                                              Employee</a></div>
@@ -72,6 +74,7 @@
 
                                  </div>
                              </div>
+
                          </div>
                          @if ($message = Session::get('success'))
                              <div class="alert alert-success">
@@ -150,7 +153,7 @@
                      ]
                  });
                  $('.dataTables_filter input[type="search"]')
-                     .attr('placeholder','  Search...')
+                     .attr('placeholder', '  Search...')
                  $('#filterTrashed').click(function() {
                      $('#datatable-crud').DataTable().draw(true)
                  })
@@ -178,6 +181,7 @@
 
      </html>
      </main>
+     
 
 
      </body>

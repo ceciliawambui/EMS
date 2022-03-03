@@ -10,7 +10,7 @@ class Department extends Model
 {
     use HasFactory;
     protected $table = 'department';
-    
+
     protected $fillable = ['name'];
     use SoftDeletes;
     protected $dates = ['deleted_at'];

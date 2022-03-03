@@ -1,8 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+ 
+use App\Models\Employee;
+use App\Models\Department;
+use App\Models\JobTitle;
 use Illuminate\Http\Request;
+use DB;
+use SoftDeletes;
 
 class HomeController extends Controller
 {
@@ -23,6 +28,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $countEmployees = Employee::withoutTrashed()->count();
+        $countDepartment =Department::withoutTrashed()->count();
+        $countJobTitles = JobTitle::withoutTrashed()->count();
+
+        return view('home', compact('countEmployees', 'countDepartment', 'countJobTitles'));
     }
 }

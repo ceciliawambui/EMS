@@ -30,7 +30,7 @@ class Employee extends Model
     {
         return $this->belongsTo(JobTitle::class, 'job_title_id', 'id');
     }
-    
 
-    
+
+
 }

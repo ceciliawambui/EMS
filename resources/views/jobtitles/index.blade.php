@@ -21,6 +21,7 @@
             body {
                 font-family: 'Times New Roman', serif;
             }
+
             .btn-group-xs>.btn,
             .btn-xs {
                 padding: .35rem .5rem;
@@ -28,12 +29,15 @@
                 line-height: .5;
                 border-radius: .2rem;
             }
+
             .table.dataTable td {
                 padding: 3px;
             }
+
             .table.dataTable th {
                 padding: 3px;
             }
+
         </style>
 
 
@@ -76,6 +80,7 @@
                                         </form>
 
                                     </div>
+
                                     @if ($message = Session::get('success'))
                                         <div class="alert alert-success">
                                             <p>{{ $message }}</p>
@@ -83,6 +88,7 @@
                                     @endif
 
                                 </div>
+
 
                                 <table class="table table-bordered" id="datatable-crud" style="width: 100%">
                                     <thead>
@@ -156,7 +162,7 @@
                         }
                     });
                     $('.dataTables_filter input[type="search"]')
-                     .attr('placeholder','  Search...')
+                        .attr('placeholder', '  Search...')
                     $('#filterTrashed').click(function() {
                         $('#datatable-crud').DataTable().draw(true)
                     })
@@ -166,6 +172,7 @@
     </html>
 
     </main>
+    
 
     </body>
 

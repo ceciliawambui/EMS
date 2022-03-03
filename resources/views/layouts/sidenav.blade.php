@@ -1,62 +1,5 @@
 <body class="sb-nav-fixed">
     <div id="layoutSidenav">
-        <div id="layoutSidenav_nav">
-            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                <div class="sb-sidenav-menu">
-                    <div class="sb-sidenav-menu-heading">EMS</div>
-                    <ul>
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html">
-                              <span class="menu-title">Dashboard</span>
-                              <i class="mdi mdi-home menu-icon"></i>
-                            </a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="index.html">
-                              <span class="menu-title">Job Titles</span>
-                              <i class="mdi mdi-home menu-icon"></i>
-                            </a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="index.html">
-                              <span class="menu-title">Departments</span>
-                              <i class="mdi mdi-home menu-icon"></i>
-                            </a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="index.html">
-                              <span class="menu-title">Employees</span>
-                              <i class="mdi mdi-home menu-icon"></i>
-                            </a>
-                          </li>
-                    </ul>
-                    {{-- <div class="nav">
-                        <div class="sb-sidenav-menu-heading">EMS</div>
-                        <a class="nav-link" href="{{ url('home') }}">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Dashboard
-                        </a>
-                        <a class="nav-link" href="{{ url('jobtitles') }}">
-                            <div class="sb-nav-link-icon"><i class="fa fa-address-book"></i></div>
-                            Job Titles
-                        </a>
-                        <a class="nav-link" href="{{ url('department') }}">
-                            <div class="sb-nav-link-icon"><i class="fa fa-sitemap"></i></div>
-                            Departments
-                        </a>
-                        <a class="nav-link" href="{{ url('employees') }}">
-                            <div class="sb-nav-link-icon"><i class="fa fa-users"></i></div>
-                            Employees
-                        </a>
-
-                    </div> --}}
-                </div>
-                <div class="sb-sidenav-footer">
-                    <div class="small"> Sky Technologies</div>
-
-                </div>
-            </nav>
-        </div>
         <div id="layoutSidenav_content">
             @yield('content')
             <main>
@@ -87,6 +30,8 @@
                                 <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the Job Titles in
                                     the Company.
                                 </p>
+                                <div class="h1 mb-0 font-weight-normal text-gray-800">{{$countJobTitles}}</div>
+
                                 <a href="{{ url('jobtitles') }}"
                                     class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                     More Info
@@ -121,6 +66,7 @@
                                 <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the Departments in
                                     the Company
                                 </p>
+                                <div class="h1 mb-0 font-weight-normal text-gray-800">{{$countDepartment}}</div>
                                 <a href="{{ url('department') }}"
                                     class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                     More Info
@@ -157,6 +103,7 @@
                                 <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the Employees in
                                     the Company.
                                 </p>
+                                <div class="h1 mb-0 font-weight-normal text-gray-800">{{$countEmployees}}</div>
                                 <a href="{{ url('employees') }}"
                                     class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                     More Info
@@ -169,44 +116,6 @@
                                 </a>
                             </div>
                         </div>
-
-
-
-
-
-                        {{-- <div class="col-xl-4 col-md-4 text-center">
-                            <div class="card bg-warning text-white mb-4">
-                            <i style="width:350px"class="fa fa-address-book fa-7x"></i>
-                                <div class="card-body" style="font-size:20px">Job Titles</div>
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="{{ url('jobtitles') }}">View
-                                        Job Titles</a>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                </div>
-                            </div>
-                        </div> --}}
-                        {{-- <div class="col-xl-4 col-md-4 text-center">
-                            <div class="card bg-success text-white mb-4">
-                            <i style="width:350px"class="fa fa-sitemap fa-7x"></i>
-                                <div class="card-body" style="font-size:20px">Departments</div>
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="{{ url('department') }}">View
-                                        Departments</a>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-md-4 text-center">
-                            <div class="card bg-primary text-white mb-4">
-                            <i style="width:350px"class="fa fa-users fa-7x"></i>
-                                <div class="card-body" style="font-size:20px">Employees</div>
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="{{url ('employees') }}">View
-                                        Employees</a>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                </div>
-                            </div>
-                        </div> --}}
 
                     </div>
                 </div>

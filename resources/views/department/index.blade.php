@@ -77,6 +77,7 @@
 
                                     </div>
 
+
                                     @if ($message = Session::get('success'))
                                         <div class="alert alert-success">
                                             <p>{{ $message }}</p>
@@ -84,6 +85,7 @@
                                     @endif
 
                                 </div>
+
 
                                 <table class="table table-bordered" id="datatable-crud" style="width: 100%">
                                     <thead>
@@ -116,7 +118,7 @@
                                 value.trashed = $("#trashed").val()
                             }
                         },
-                        
+
                         columns: [{
                                 data: 'name',
                                 name: 'name'
@@ -164,6 +166,7 @@
 
 
     </main>
+    
 
     </div>
     </div>

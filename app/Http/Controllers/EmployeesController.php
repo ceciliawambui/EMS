@@ -31,6 +31,7 @@ class EmployeesController extends Controller
      */
     public function index(Request $request)
     {
+
         if(request()->ajax()) {
 
             $employees = Employee::with(['department', 'jobTitle']);
@@ -51,9 +52,9 @@ class EmployeesController extends Controller
                     return view('employees.action', [
                         'id' => $employee->id,
                         'trashed' => $request->trashed,
-                     
+
                     ]);
-      
+
                 })
                 ->rawColumns(['action'])
                 ->addIndexColumn()
@@ -62,20 +63,19 @@ class EmployeesController extends Controller
 
         return view('employees.index');
     }
-    public function restore($id ) 
+    public function restore($id )
     {
-        // Employee::withTrashed()->find($id)->restore();
         Employee::where('id', $id)->withTrashed()->restore();
 
         return redirect()->route('employees.index');
     }
-    public function forceDelete($id) 
+    public function forceDelete($id)
     {
         Employee::where('id', $id)->onlyTrashed()->forceDelete();
 
         return redirect()->route('employees.index');
     }
-    public function restoreAll() 
+    public function restoreAll()
     {
         Employee::onlyTrashed()->restore();
 
@@ -89,13 +89,9 @@ class EmployeesController extends Controller
      */
     public function create()
     {
-
-
         $departments = Department::all(); // get all the departments
-        $jobtitles = JobTitle::all(); 
-        // dd($departments); //same as var_dump
+        $jobtitles = JobTitle::all();
         return view('employees/create', [ 'departments' => $departments,'jobtitles' => $jobtitles]);
-        // return view('employees/create');
     }
 
     /**
@@ -109,7 +105,7 @@ class EmployeesController extends Controller
         'first_name' => 'required',
         'last_name' => 'required',
         'email' => 'required',
-        'salary' => 'required',
+        'salary' => 'required|numeric',
         'job_title_id' => 'required',
         'department_id' => 'required'
         ]);
@@ -120,28 +116,9 @@ class EmployeesController extends Controller
         $employee->salary = $request->salary;
         $employee->job_title_id = $request->job_title_id;
         $employee->department_id = $request->department_id;
-        // $company->email = $request->email;
-        // $company->address = $request->address;
         $employee->save();
         return redirect()->route('employees.index');
-        // ->with('success','Employee has been created successfully.');
     }
-    // public function store(EmployeeRequest $request)
-    // {        
-    //     $employee = Employee::create([
-    //         'first_name' => $request['first_name'],
-    //         'last_name' => $request['last_name'],
-    //         'salary' => $request['salary'],
-    //         'job_title_id' => $request['job_title_id'],
-    //         'department_id' => $request['department_id'],
-    //         'email' => $request['email']
-    //     ]);
-        
-    //     $employee->notify(new SendEmployeeNotification());
-
-    //     return redirect()->intended('employees');
-    // }
-
     /**
      * Display the specified resource.
      *
@@ -150,11 +127,7 @@ class EmployeesController extends Controller
      */
     public function show(Employee $employee){
         return view('employees.show',compact('employee'));
-    } 
-    // public function show($id)
-    // {
-    //     //
-    // }
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -164,23 +137,9 @@ class EmployeesController extends Controller
      */
     public function edit(Employee $employee){
         $departments = Department::all();
-        $jobtitles = JobTitle::all(); 
+        $jobtitles = JobTitle::all();
         return view('employees.edit',compact('employee','departments', 'jobtitles'));
     }
-    // public function edit($id)
-    // {
-        
-    //     $departments = Department::all(); // get all the departments
-    //     $jobtitles = JobTitle::all(); 
-    //     $employees = Employee::findOrFail($id);
-
-
-    //     return view('employees/edit', [ 'departments' => $departments,'jobtitles' => $jobtitles, 'employees' => $employees]);
-    //     // $employees = Employee::findOrFail($id);
-
-    //     // return view('employees/edit', ['employees' => $employees]);
-    // }
-
     /**
      * Update the specified resource in storage.
      *
@@ -194,7 +153,7 @@ class EmployeesController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required',
-            'salary' => 'required',
+            'salary' => 'required|numeric',
             'job_title_id' => 'required',
             'department_id' => 'required'
         ]);
@@ -208,26 +167,9 @@ class EmployeesController extends Controller
         $employee->save();
 
         return redirect()->route('employees.index');
-        // ->with('success','Employee has been updated successfully.');
+
     }
 
-    // public function update(Request $request, $id)
-    // {
-    //     $employees = Employee::findOrFail($id);
-    //     $this->validateInput($request);
-    //     $input = [
-    //         'first_name' => $request['first_name'],
-    //         'last_name' => $request['last_name'],
-    //         'salary' => $request['salary'],
-    //         'job_title_id' => $request['job_title_id'],
-    //         'department_id' => $request['department_id'],
-    //         'email' => $request['email']
-    //     ];
-    //     Employee::where('id', $id)
-    //         ->update($input);
-        
-    //     return redirect()->intended('employees');
-    // }
 
     /**
      * Remove the specified resource from storage.
@@ -238,17 +180,11 @@ class EmployeesController extends Controller
     public function destroy(Request $request){
         $com = Employee::where('id',$request->id)->delete();
         return Response()->json($com);
-        
+
     }
 
-    // public function destroy($id)
-    // {
-    //     Employee::where('id', $id)->delete();
-    //      return redirect()->intended('employees');
-    // }
-
     /**
-     * Search department from database base on some specific constraints
+     * Search employee from database base on some specific constraints
      *
      * @param  \Illuminate\Http\Request  $request
      *  @return \Illuminate\Http\Response
@@ -282,7 +218,7 @@ class EmployeesController extends Controller
         'email' => 'required',
         'job_title_id' => 'required',
         'department_id' => 'required',
-        'salary' => 'required'
+        'salary' => 'required|numeric'
 
     ]);
     }

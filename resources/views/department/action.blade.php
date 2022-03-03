@@ -5,9 +5,7 @@
 <a href="javascript:void(0)" data-id="{{ $id }}" data-toggle="tooltip" data-original-title="Delete" class="delete btn btn-dark btn-xs">
     Trash
 </a>
-{{-- <a href="javascript:void(0)"  data-id="{{ $id }}" data-toggle="tooltip" data-original-title="Delete" class="edit btn btn-dark edit">
-    Trash
-</a> --}}
+
 @endif
 @if($trashed == 1)
 <a href="{{ route('department.forceDelete',$id) }}" data-toggle="tooltip" data-original-title="Delete" class="delete btn btn-danger btn-xs">
