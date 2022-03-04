@@ -38,24 +38,61 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    {{-- <link rel="dns-prefetch" href="//fonts.gstatic.com"> --}}
+    {{-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> --}}
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
-    body {
-        font-family: 'Times New Roman', serif;
-    }
+        body {
+            font-family: 'Times New Roman', serif;
+            margin: 0;
+            font-size: .9rem;
+            font-weight: 400;
+            line-height: 1.6;
+            color: #212529;
+            text-align: left;
+            background-color: #f5f8fa;
+        }
+
+        .navbar-laravel {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .04);
+        }
+
+        .navbar-brand,
+        .nav-link,
+        .my-form,
+        .login-form {
+            font-family: Raleway, sans-serif;
+        }
+
+        .my-form {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .my-form .row {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .login-form {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .login-form .row {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
     </style>
 </head>
 
 <body>
-    <div id="app">     
-
-                   
-
+    <div id="app">
         <main class="py-4">
+
             @yield('content')
         </main>
     </div>
@@ -69,7 +106,7 @@
     <script src="{{ asset('/sbadmin/dist/assets/demo/chart-bar-demo.js') }}"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
     <script src="{{ asset('/sbadmin/dist/js/datatables-simple-demo.js') }}"></script>
-    
+
 </body>
 
 </html>
