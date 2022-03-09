@@ -1,4 +1,5 @@
-<body class="sb-nav-fixed" style="font-family: 'Times New Roman', serif">
+
+<body class="sb-nav-fixed" style="font-family: 'Times New Roman', serif  !important">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
         <a class="navbar-brand ps-3" href="index.php" style="font-family: 'Times New Roman', Times, serif">Sky Technologies</a>
@@ -18,26 +19,19 @@
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li>
-                <img src=" {{ Auth::user()->image }}"class="rounded-circle" width="50px" alt="Profile Photo">
+                <img src=" {{ Auth::user()->image }}"style="border-radius: 100%;width: 40px; height: 40px;" alt="Profile Photo">
             </li>
             <li class="nav-item dropdown">
-
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
-
-                    {{-- <i class="fas fa-user fa-fw"></i> --}}
-                    {{ auth()->user()->name }}</a>
+                    {{ Auth::user()->name }}</a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 
                     <li>
-                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
+                        <a  class="dropdown-item" href="{{route('logout')}}">Logout</a>
+                    </li>
+                    <li>
+                        <a  class="dropdown-item" href="{{route('profile')}}">Profile</a>
                     </li>
                 </ul>
             </li>
@@ -51,36 +45,35 @@
                     <ul>
                     <li class="nav-item">
                             <a class="nav-link" href="{{ url('profile') }}">
-                                 {{-- <img src=" {{ Auth::user()->image }}"class="rounded-circle" alt="Profile Photo"> --}}
-                                {{-- <i class="fas fa-user-alt" style="align-items:center"></i> --}}
+                              
 
-                              <img src=" {{ Auth::user()->image }}"class="rounded-circle" width="100px" alt="Profile Photo">
+                              <img src=" {{ Auth::user()->image }}"style="border-radius: 100%;width: 100px; height: 100px;" alt="Profile Photo">
 
-                              <span class="menu-title">View Profile</span>
+                              <span class="menu-title"style="font-family:'Times New Roman', Times, serif">View Profile</span>
                             </a>
                           </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('home') }}">
-                              <span class="menu-title" style="margin-right:90px" style="font-family: 'Times New Roman', Times, serif">Dashboard</span>
-                              <i class="fas fa-tachometer-alt"></i>
+                              <span class="menu-title" style="font-family: 'Times New Roman', Times, serif">Dashboard</span>
+                              <i class="fas fa-tachometer-alt float-right"></i>
                             </a>
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" href="{{ url('jobtitles') }}">
-                              <span class="menu-title"  style="margin-right:100px"style="font-family: 'Times New Roman', Times, serif">Job Titles</span>
-                              <i class="fa fa-address-book"></i>
+                              <span class="menu-title"  style="font-family: 'Times New Roman', Times, serif">Job Titles</span>
+                              <i class="fa fa-address-book float-right"></i>
                             </a>
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" href="{{ url('department') }}">
-                              <span class="menu-title"  style="margin-right:75px"style="font-family: 'Times New Roman', Times, serif">Departments</span>
-                              <i class="fa fa-sitemap"></i>
+                              <span class="menu-title"  style="font-family: 'Times New Roman', Times, serif">Departments</span>
+                              <i class="fa fa-sitemap float-right"></i>
                             </a>
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" href="{{ url('employees') }}">
-                              <span class="menu-title"  style="margin-right:85px"style="font-family: 'Times New Roman', Times, serif">Employees</span>
-                              <i class="fa fa-users"></i>
+                              <span class="menu-title"  style="font-family: 'Times New Roman', Times, serif">Employees</span>
+                              <i class="fa fa-users float-right"></i>
                             </a>
                           </li>
                     </ul>
@@ -115,4 +108,6 @@
     </div>
 </body>
 
+
 </html>
+

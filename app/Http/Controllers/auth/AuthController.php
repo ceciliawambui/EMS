@@ -63,8 +63,8 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
-            'image' => 'required',
+            'password' => 'required',
+            'image' => 'required|unique:users',
         ]);
 
         $data = $request->all();
@@ -109,7 +109,7 @@ class AuthController extends Controller
      * @return response()
      */
     public function logout() {
-        Session::flush();
+        // Session::flush();
         Auth::logout();
 
         return Redirect('/');
@@ -131,21 +131,29 @@ class AuthController extends Controller
     // public function edit(User $user){
     //     return view('profile');
     // }
-    public function update(Request $request, User $user){
+    public function update(Request $request){
         $request->validate([
         'name' => 'required',
         'email' => 'required',
-        // 'password' => 'required',
-        // 'image' => 'required',
+        'confirm_password' => ['same:new_password'],
+        //  'new_password' => ['same:new_password'],
 
         ]);
-        // $users = User::find($id);
+        $user = Auth::user(); //single user
         $user->name = $request->name;
         $user->email = $request->email;
+        if($request->hasFile('image')){
+            $filename = $request->image->getClientOriginalName();
+            $request->image->storeAs('images',$filename,'public');
+            $user->image = $filename;
+        }
+        if($request->confirm_password){
+            $user->password = Hash::make($request->new_password);
+        }
         // $users->image = $request->image;
         // $user->password = bcrypt(request('password'));
         $user->save();
-        return redirect()->route('profile', compact('users'));
+        return redirect()->route('profile', compact('user'));
 
     }
 
