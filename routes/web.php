@@ -30,9 +30,9 @@ Route::post('post-registration', [AuthController::class, 'postRegistration'])->n
 Route::get('dashboard', [AuthController::class, 'dashboard']);
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 // Route::get('upload', [AuthController::class, 'upload'])->name('upload');
-Route::get('edit', 'App\Http\Controllers\auth\AuthController@edit')->name('edit');
-Route::post('update', 'App\Http\Controllers\auth\AuthController@update')->name('update');
-// Route::resource('user', 'App\Http\Controllers\auth\AuthController');
+Route::get('edit', 'App\Http\Controllers\Auth\AuthController@edit')->name('edit');
+Route::post('update', 'App\Http\Controllers\Auth\AuthController@update')->name('update');
+// Route::resource('user', 'App\Http\Controllers\Auth\AuthController');
 
 // Change Password
 Route::get('change-password', 'App\Http\Controllers\ChangePasswordController@index');
