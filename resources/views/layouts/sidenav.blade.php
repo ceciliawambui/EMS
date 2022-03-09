@@ -1,4 +1,4 @@
-<body class="sb-nav-fixed">
+<body class="sb-nav-fixed" style="font-family: 'Times New Roman', Times, serif">
     <div id="layoutSidenav">
         <div id="layoutSidenav_content">
             @yield('content')

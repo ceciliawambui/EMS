@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\AuthController;
+use App\User;
 
 
 /*
@@ -20,14 +21,26 @@ use App\Http\Controllers\Auth\AuthController;
 // });
 
 
-// Auth::routes();
+Auth::routes();
 // Authentication routes
 Route::get('/', [AuthController::class, 'index'])->name('login');
 Route::post('post-login', [AuthController::class, 'postLogin'])->name('login.post');
 Route::get('registration', [AuthController::class, 'registration'])->name('register');
 Route::post('post-registration', [AuthController::class, 'postRegistration'])->name('register.post');
-// Route::get('dashboard', [AuthController::class, 'dashboard']);
+Route::get('dashboard', [AuthController::class, 'dashboard']);
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+// Route::get('upload', [AuthController::class, 'upload'])->name('upload');
+Route::get('edit', 'App\Http\Controllers\auth\AuthController@edit')->name('edit');
+Route::get('update', 'App\Http\Controllers\auth\AuthController@update')->name('update');
+// Route::resource('user', 'App\Http\Controllers\auth\AuthController');
+
+// Change Password
+Route::get('change-password', 'App\Http\Controllers\ChangePasswordController@index');
+Route::post('change-password', 'App\Http\Controllers\ChangePasswordController@store')->name('change.password');
+
+
+
+
 
 
 
@@ -35,6 +48,8 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 
 Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
 
 Route::resource('department', 'App\Http\Controllers\DepartmentController');
 Route::post('department/search', 'App\Http\Controllers\DepartmentController@search')->name('department.search');

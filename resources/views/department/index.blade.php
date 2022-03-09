@@ -1,5 +1,5 @@
 @extends('layouts.base')
-@extends('jobtitles.base')
+@extends('department.base')
 @section('content')
     <!DOCTYPE html>
     <html lang="en">
@@ -166,7 +166,7 @@
 
 
     </main>
-    
+
 
     </div>
     </div>
