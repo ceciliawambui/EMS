@@ -36,7 +36,7 @@
                                                 Current:</label>
                                             <div class="col-md-6">
                                                 <br>
-                                                <img src=" {{ Auth::user()->image }}" style="border-radius: 100%;width: 100px; height: 100px;" alt="Profile Photo">
+                                                <img src="{{asset ('storage/images/'.Auth::user()->image)}}" style="border-radius: 100%;width: 100px; height: 100px;" alt="Profile Photo">
                                                 <br>
                                                 <input type="file"  accept="image/*" id="image" class="form-control" name="image" value=""
                                                     autofocus>
@@ -60,7 +60,7 @@
                                                 </label>
                                             <div class="col-md-6">
                                                 <input type="text" id="email_address" class="form-control" name="email" value=" {{ Auth::user()->email }}"required
-                                                    autofocus>
+                                                    disabled>
                                                 @if ($errors->has('email'))
                                                     <span class="text-danger">{{ $errors->first('email') }}</span>
                                                 @endif

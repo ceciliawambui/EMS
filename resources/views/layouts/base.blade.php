@@ -2,9 +2,9 @@
 <body class="sb-nav-fixed" style="font-family: 'Times New Roman', serif  !important">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="index.php" style="font-family: 'Times New Roman', Times, serif">Sky Technologies</a>
+        <a class="navbar-brand ps-1" href="index.php" style="font-family: 'Times New Roman', Times, serif">Sky Technologies</a>
         <!-- Sidebar Toggle-->
-        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-5 me-lg-0" id="sidebarToggle" href="#!"><i
                 class="fas fa-bars"></i></button>
 
         <!-- Navbar Search-->
@@ -19,7 +19,7 @@
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li>
-                <img src=" {{ Auth::user()->image }}"style="border-radius: 100%;width: 40px; height: 40px;" alt="Profile Photo">
+                <img src="{{asset ('storage/images/'.Auth::user()->image)}}"style="border-radius: 100%;width: 40px; height: 40px;" alt="Profile Photo">
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
@@ -45,9 +45,9 @@
                     <ul>
                     <li class="nav-item">
                             <a class="nav-link" href="{{ url('profile') }}">
-                              
 
-                              <img src=" {{ Auth::user()->image }}"style="border-radius: 100%;width: 100px; height: 100px;" alt="Profile Photo">
+
+                              <img src="{{asset ('storage/images/'.Auth::user()->image)}}"style="border-radius: 100%;width: 100px; height: 100px;" alt="Profile Photo">
 
                               <span class="menu-title"style="font-family:'Times New Roman', Times, serif">View Profile</span>
                             </a>

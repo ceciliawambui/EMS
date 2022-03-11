@@ -16,10 +16,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('register') }}">Register</a>
                     </li>
-
+{{--
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('logout') }}">Logout</a>
-                    </li>
+                    </li> --}}
 
                 </ul>
 
@@ -34,7 +34,7 @@
                         <div class="card-header" style="text-align: center;font-size:40px">USER REGISTRATION</div>
                         <div class="card-body">
 
-                            <form action="{{ route('register.post') }}" method="POST">
+                            <form action="{{ route('register.post') }}" method="POST" enctype="multipart/form-data" >
                                 @csrf
                                 <div class="form-group row">
                                     <label for="image" class="col-md-4 col-form-label text-md-right">Image</label>
@@ -51,10 +51,12 @@
                                 <div class="form-group row">
                                     <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="name" class="form-control" name="name" required autofocus>
-                                        @if ($errors->has('name'))
-                                            <span class="text-danger">{{ $errors->first('name') }}</span>
-                                        @endif
+                                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                        @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                                     </div>
                                 </div>
 
@@ -62,11 +64,12 @@
                                     <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail
                                         </label>
                                     <div class="col-md-6">
-                                        <input type="text" id="email_address" class="form-control" name="email" required
-                                            autofocus>
-                                        @if ($errors->has('email'))
-                                            <span class="text-danger">{{ $errors->first('email') }}</span>
-                                        @endif
+                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                            @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -98,10 +101,12 @@
                                 </div>
 
 
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary btn-outline">
-                                        Register
-                                    </button>
+                                <div class="row mb-0">
+                                    <div class="col-md-6 offset-md-4">
+                                        <button type="submit" class="btn btn-primary">
+                                            {{ __('Register') }}
+                                        </button>
+                                    </div>
                                 </div>
                             </form>
 

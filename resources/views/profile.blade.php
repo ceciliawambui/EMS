@@ -34,9 +34,10 @@
                                             @csrf
                                             <div class="form-group row justify-content-center" >
 
-
                                                 <div class="col-md-6 justify-content-left">
-                                                    <img src=" {{ Auth::user()->image }}" style="border-radius: 100%;width: 150px; height: 150px;" alt="Profile Photo">
+                                                    {{-- src="{{ asset('storage/'.$post->image) }}" --}}
+                                                    {{-- <p>{{ Auth::user()->image}}</p> --}}
+                                                    <img src="{{asset ('storage/images/'.Auth::user()->image)}}" style="border-radius: 100%;width: 150px; height: 150px;" alt="Profile Photo">
 
                                                     @if ($errors->has('image'))
                                                         <span class="text-danger">{{ $errors->first('image') }}</span>
@@ -82,6 +83,9 @@
 
                                                 </div>
                                             </div>
+
+
+
                                         </form>
 
 

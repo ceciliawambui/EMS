@@ -39,18 +39,22 @@ class AuthController extends Controller
     public function postLogin(Request $request)
     {
         $request->validate([
-            'email' => 'required',
-            'password' => 'required',
+            'email'=>['required','email'],
+            'password'=>'required',
+            // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            // 'password' => ['required', 'string', 'min:8', 'confirmed'],
             // 'image' => 'required',
         ]);
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             return redirect()->intended('home')
-                        ->withSuccess('You have Successfully loggedin');
+                        ->with('You have Successfully loggedin');
+        }else{
+            return redirect()->back()->with('status', 'Invalid credentials!');
         }
 
-        return redirect("/")->withSuccess('Oppes! You have entered invalid credentials');
+
     }
 
     /**
@@ -61,13 +65,21 @@ class AuthController extends Controller
     public function postRegistration(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required',
-            'image' => 'required|unique:users',
+            'name' => ['required', 'string', 'max:255'],
+            'email' =>  ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048|unique:users',
+
         ]);
 
         $data = $request->all();
+        if($request->hasFile("image")){
+            $filename = $request->image->getClientOriginalName();
+            $request->image->storeAs('images',$filename,'public');
+            $data["image"] = $filename;
+            // dd($filename);
+        }
+
         $check = $this->create($data);
 
         return redirect("/");
@@ -94,10 +106,11 @@ class AuthController extends Controller
      */
     public function create(array $data)
     {
+
       return User::create([
         'name' => $data['name'],
         'email' => $data['email'],
-        'image'=> $data['image'],
+        'image'=>  $data['image'],
         'password' => Hash::make($data['password'])
 
       ]);
@@ -114,15 +127,15 @@ class AuthController extends Controller
 
         return Redirect('/');
     }
-    public function upload(Request $request)
-    {
-        if($request->hasFile('image')){
-            $filename = $request->image->getClientOriginalName();
-            $request->image->storeAs('images',$filename,'public');
-            Auth()->user()->update(['image'=>$filename]);
-        }
-        return redirect()->back();
-    }
+    // public function upload(Request $request)
+    // {
+    //     if($request->hasFile('image')){
+    //         $filename = $request->image->getClientOriginalName();
+    //         $request->image->storeAs('images',$filename,'public');
+    //         Auth()->user()->update(['image'=>$filename]);
+    //     }
+    //     return redirect()->back();
+    // }
     public function edit(User $user)
     {
         $users = Auth::user();
@@ -133,19 +146,20 @@ class AuthController extends Controller
     // }
     public function update(Request $request){
         $request->validate([
-        'name' => 'required',
-        'email' => 'required',
+            'name' => ['required', 'string', 'max:255'],
+            // 'email' =>  ['required', 'string', 'email', 'max:255', 'unique:users'],
         'confirm_password' => ['same:new_password'],
         //  'new_password' => ['same:new_password'],
 
         ]);
         $user = Auth::user(); //single user
         $user->name = $request->name;
-        $user->email = $request->email;
+        // $user->email = $request->email;
         if($request->hasFile('image')){
             $filename = $request->image->getClientOriginalName();
             $request->image->storeAs('images',$filename,'public');
             $user->image = $filename;
+            // dd($filename);
         }
         if($request->confirm_password){
             $user->password = Hash::make($request->new_password);

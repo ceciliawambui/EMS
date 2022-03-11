@@ -21,7 +21,7 @@ use App\User;
 // });
 
 
-Auth::routes();
+// Auth::routes();
 // Authentication routes
 Route::get('/', [AuthController::class, 'index'])->name('login');
 Route::post('post-login', [AuthController::class, 'postLogin'])->name('login.post');
