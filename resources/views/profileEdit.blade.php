@@ -22,27 +22,35 @@
 <body class="sb-nav-fixed">
     <div id="layoutSidenav">
         <div id="layoutSidenav_content">
-            <main class="login-form">
+            {{-- <main class="login-form"> --}}
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-md-6">
                             <div class="card">
-                                <div class="card-header" style="text-align: center;font-size:40px;font-family:'Times New Roman', Times, serif">Edit User Profile</div>
+                                <div class="card-header" style="text-align: center;font-size:30px;font-family:'Times New Roman', Times, serif">Edit User Profile</div>
                                 <div class="card-body">
                                     <form method="post" action="{{ route('update') }}" enctype="multipart/form-data" >
                                         @csrf
                                         <div class="form-group row">
-                                            <label for="image" class="col-md-4 col-form-label text-md-right"style="font-family:'Times New Roman', Times, serif">Profile Picture<br>
-                                                Current:</label>
+                                            <label for="image" class="col-md-4 col-form-label text-md-right"style="font-family:'Times New Roman', Times, serif">
+                                            {{-- Current Picture<br> --}}
+                                               </label>
                                             <div class="col-md-6">
-                                                <br>
-                                                <img src="{{asset ('storage/images/'.Auth::user()->image)}}" style="border-radius: 100%;width: 100px; height: 100px;" alt="Profile Photo">
-                                                <br>
+                                                <img src="{{asset ('storage/images/'.Auth::user()->image)}}" style="border-radius: 100%;width: 150px; height: 150px;" alt="Profile Photo">
+                                            <br>
+                                            </div>
+                                            <br>
+                                            <label for="image" class="col-md-4  col-form-label text-md-right"style="font-family:'Times New Roman', Times, serif">
+                                                Change Picture <span style="color: red">*</span></label>
+
+                                            <div class="col-md-6">
+
                                                 <input type="file"  accept="image/*" id="image" class="form-control" name="image" value=""
                                                     autofocus>
                                                 @if ($errors->has('image'))
                                                     <span class="text-danger">{{ $errors->first('image') }}</span>
                                                 @endif
+
                                             </div>
                                         </div>
 
@@ -59,8 +67,7 @@
                                             <label for="email_address" class="col-md-4 col-form-label text-md-right" style="font-family:'Times New Roman', Times, serif">E-Mail<span style="color: red">*</span>
                                                 </label>
                                             <div class="col-md-6">
-                                                <input type="text" id="email_address" class="form-control" name="email" value=" {{ Auth::user()->email }}"required
-                                                    disabled>
+                                                <input type="text" id="email_address" class="form-control" name="email" value=" {{ Auth::user()->email }}">
                                                 @if ($errors->has('email'))
                                                     <span class="text-danger">{{ $errors->first('email') }}</span>
                                                 @endif
@@ -100,7 +107,7 @@
                         </div>
                     </div>
                 </div>
-            </main>
+            {{-- </main> --}}
         </div>
     </div>
 </body>
