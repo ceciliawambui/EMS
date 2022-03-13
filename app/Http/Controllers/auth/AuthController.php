@@ -6,11 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Session;
+use Illuminate\Auth\Events\Registered;
 use App\Models\User;
 use Hash;
+use RegistersUsers;
 
 class AuthController extends Controller
 {
+
     /**
      * Write code on Method
      *
@@ -114,6 +117,7 @@ class AuthController extends Controller
         'password' => Hash::make($data['password'])
 
       ]);
+      event(new Registered($user));
     }
 
     /**

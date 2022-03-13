@@ -20,9 +20,16 @@ use App\User;
 //     return view('auth.login');
 // });
 
-
-// Auth::routes();
 // Authentication routes
+Auth::routes(['verify' => true]);
+
+// Verification Routes
+
+// Route::get('/email/verify', 'VerificationController@show')->name('verification.notice');
+// Route::get('/email/verify/{id}/{hash}', 'VerificationController@verify')->name('verification.verify')->middleware(['signed']);
+// Route::post('/email/resend', 'VerificationController@resend')->name('verification.resend');
+
+
 Route::get('/', [AuthController::class, 'index'])->name('login');
 Route::post('post-login', [AuthController::class, 'postLogin'])->name('login.post');
 Route::get('registration', [AuthController::class, 'registration'])->name('register');
@@ -40,7 +47,7 @@ Route::post('change-password', 'App\Http\Controllers\ChangePasswordController@st
 
 
 
-Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
 
 // Profile(not used at the moment)
 Route::get('profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
