@@ -105,6 +105,11 @@ class EmployeesController extends Controller
         'first_name' => 'required',
         'last_name' => 'required',
         'email' => 'required',
+        'nssf' => 'required|numeric',
+        'nhif' => 'required|numeric',
+        'kra_pin' => 'required',
+        'account_number' => 'required|numeric',
+        'bank' => 'required',
         'salary' => 'required|numeric',
         'job_title_id' => 'required',
         'department_id' => 'required'
@@ -113,6 +118,11 @@ class EmployeesController extends Controller
         $employee->first_name = $request->first_name;
         $employee->last_name = $request->last_name;
         $employee->email = $request->email;
+        $employee->nssf = $request->nssf;
+        $employee->nhif = $request->nhif;
+        $employee->kra_pin = $request->kra_pin;
+        $employee->account_number = $request->account_number;
+        $employee->bank = $request->bank;
         $employee->salary = $request->salary;
         $employee->job_title_id = $request->job_title_id;
         $employee->department_id = $request->department_id;
@@ -153,6 +163,11 @@ class EmployeesController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required',
+            'nssf' => 'required|numeric',
+            'nhif' => 'required|numeric',
+            'kra_pin' => 'required',
+            'account_number' => 'required|numeric',
+            'bank' => 'required',
             'salary' => 'required|numeric',
             'job_title_id' => 'required',
             'department_id' => 'required'
@@ -161,6 +176,11 @@ class EmployeesController extends Controller
         $employee->first_name = $request->first_name;
         $employee->last_name = $request->last_name;
         $employee->email = $request->email;
+        $employee->nssf = $request->nssf;
+        $employee->nhif = $request->nhif;
+        $employee->kra_pin = $request->kra_pin;
+        $employee->account_number = $request->account_number;
+        $employee->bank = $request->bank;
         $employee->salary = $request->salary;
         $employee->job_title_id = $request->job_title_id;
         $employee->department_id = $request->department_id;
@@ -213,12 +233,17 @@ class EmployeesController extends Controller
     }
     private function validateInput($request) {
         $this->validate($request, [
-        'first_name' => 'required',
-        'last_name' => 'required',
-        'email' => 'required',
-        'job_title_id' => 'required',
-        'department_id' => 'required',
-        'salary' => 'required|numeric'
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required',
+            'nssf' => 'required|numeric',
+            'nhif' => 'required|numeric',
+            'kra_pin' => 'required',
+            'account_number' => 'required|numeric',
+            'bank' => 'required',
+            'salary' => 'required|numeric',
+            'job_title_id' => 'required',
+            'department_id' => 'required'
 
     ]);
     }

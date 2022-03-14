@@ -88,6 +88,11 @@
                                      <th>First Name</th>
                                      <th>Last Name</th>
                                      <th>Email</th>
+                                     <th>NSSF</th>
+                                     <th>NHIF</th>
+                                     <th>KRA Pin</th>
+                                     <th>Account Number</th>
+                                     <th>Bank</th>
                                      <th>Job Title</th>
                                      <th>Department</th>
                                      <th>Salary</th>
@@ -129,6 +134,26 @@
                          {
                              data: 'email',
                              name: 'email'
+                         },
+                         {
+                             data: 'nssf',
+                             name: 'nssf'
+                         },
+                         {
+                             data: 'nhif',
+                             name: 'nhif'
+                         },
+                         {
+                             data: 'kra_pin',
+                             name: 'kra_pin'
+                         },
+                         {
+                             data: 'account_number',
+                             name: 'account_number'
+                         },
+                         {
+                             data: 'bank',
+                             name: 'bank'
                          },
                          {
                              data: 'job_title',
@@ -181,7 +206,7 @@
 
      </html>
      </main>
-     
+
 
 
      </body>

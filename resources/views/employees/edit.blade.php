@@ -66,6 +66,76 @@
             @endif
         </div>
     </div>
+    <div class="form-group{{ $errors->has('nssf') ? ' has-error' : '' }}">
+        <label for="email" class="col-md-4 control-label">NSSF</label>
+
+        <div class="col-md-6">
+            <input id="nssf" type="text" class="form-control" name="nssf"  value="{{ $employee->nssf }}"
+                required autofocus>
+
+            @if ($errors->has('nssf'))
+            <span class="help-block">
+                <strong>{{ $errors->first('nssf') }}</strong>
+            </span>
+            @endif
+        </div>
+    </div>
+    <div class="form-group{{ $errors->has('nhif') ? ' has-error' : '' }}">
+        <label for="nhif" class="col-md-4 control-label">NHIF</label>
+
+        <div class="col-md-6">
+            <input id="nhif" type="text" class="form-control" name="nhif"  value="{{ $employee->nhif }}"
+                required autofocus>
+
+            @if ($errors->has('nhif'))
+            <span class="help-block">
+                <strong>{{ $errors->first('nhif') }}</strong>
+            </span>
+            @endif
+        </div>
+    </div>
+    <div class="form-group{{ $errors->has('kra_pin') ? ' has-error' : '' }}">
+        <label for="kra_pin" class="col-md-4 control-label">KRA Pin</label>
+
+        <div class="col-md-6">
+            <input id="kra_pin" type="text" class="form-control" name="kra_pin"  value="{{ $employee->kra_pin }}"
+                required autofocus>
+
+            @if ($errors->has('kra_pin'))
+            <span class="help-block">
+                <strong>{{ $errors->first('kra_pin') }}</strong>
+            </span>
+            @endif
+        </div>
+    </div>
+    <div class="form-group{{ $errors->has('account_number') ? ' has-error' : '' }}">
+        <label for="account_number" class="col-md-4 control-label">Account Number</label>
+
+        <div class="col-md-6">
+            <input id="account_number" type="text" class="form-control" name="account_number"  value="{{ $employee->account_number }}"
+                required autofocus>
+
+            @if ($errors->has('account_number'))
+            <span class="help-block">
+                <strong>{{ $errors->first('account_number') }}</strong>
+            </span>
+            @endif
+        </div>
+    </div>
+    <div class="form-group{{ $errors->has('bank') ? ' has-error' : '' }}">
+        <label for="bank" class="col-md-4 control-label">Bank</label>
+
+        <div class="col-md-6">
+            <input id="bank" type="text" class="form-control" name="bank"  value="{{ $employee->bank }}"
+                required autofocus>
+
+            @if ($errors->has('bank'))
+            <span class="help-block">
+                <strong>{{ $errors->first('bank') }}</strong>
+            </span>
+            @endif
+        </div>
+    </div>
 
 
     <!-- selection of department -->

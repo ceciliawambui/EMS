@@ -17,7 +17,7 @@ class Employee extends Model
     use SoftDeletes;
     protected $dates = ['deleted_at'];
 
-    protected $fillable = ['job_title_id', 'department_id', 'first_name', 'last_name', 'email', 'salary'];
+    protected $fillable = ['job_title_id', 'department_id', 'first_name', 'last_name', 'email', 'salary', 'nssf', 'nhif', 'account_number', 'bank', 'kra_pin'];
 
     // relationships
     // employee belongs to a department and a job title
