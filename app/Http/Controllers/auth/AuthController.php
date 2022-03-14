@@ -49,10 +49,11 @@ class AuthController extends Controller
             // 'image' => 'required',
         ]);
 
+
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             return redirect()->intended('home')
-                        ->with('You have Successfully loggedin');
+                        ->with('status', 'You have Successfully logged in');
         }else{
             return redirect()->back()->with('status', 'Invalid credentials!');
         }
@@ -168,10 +169,12 @@ class AuthController extends Controller
         if($request->confirm_password){
             $user->password = Hash::make($request->new_password);
         }
+
         // $users->image = $request->image;
         // $user->password = bcrypt(request('password'));
         $user->save();
-        return redirect()->route('profile', compact('user'));
+        // return('You have successfully updated your profile');
+        return view('profile', compact('user'))->with('success','You have successfully updated your profile');
 
     }
 

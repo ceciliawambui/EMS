@@ -4,6 +4,7 @@
     <nav class="navbar navbar-expand-lg navbar-light navbar-laravel">
         <div class="container">
             <a class="navbar-brand" href="#">Sky Technologies</a>
+            {{-- <img src="/skytech.jpeg" alt="Sky Tech" width="100" height="50"> --}}
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -33,11 +34,12 @@
                     <div class="card">
                         <div class="card-header" style="text-align: center;font-size:40px">USER LOGIN</div>
                         <div class="card-body">
-                            @if (session()->has('message'))
+                            @if (session('status'))
                                 <div class="alert alert-success">
-                                    {{ session()->get('message') }}
+                                    {{ session('status') }}
                                 </div>
                             @endif
+                        
                             <form action="{{ route('login.post') }}" method="POST">
 
                                 @csrf
@@ -46,7 +48,8 @@
                                     <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail
                                     </label>
                                     <div class="col-md-6">
-                                        <input type="text" id="email_address" class="form-control" name="email" required
+                                        <input type="text" id="email_address"
+                                            class="form-control" name="email" required
                                             autofocus>
                                         @if ($errors->has('email'))
                                             <span class="text-danger">{{ $errors->first('email') }}</span>
