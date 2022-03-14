@@ -31,6 +31,17 @@
                     <form action="{{ route('jobtitles.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
+                            <strong>Job Title Number: </strong>
+                            <input type="text" name="job_title_no" class="form-control" placeholder="Job Title Number">
+                            @error('job_title_no')
+                                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                            @enderror
+                            <div>
+
+                            </div>
+
+                        </div>
+                        <div class="form-group">
                             <strong>Job Title:</strong>
                             <input type="text" name="name" class="form-control" placeholder="Job Title ">
                             @error('name')
@@ -39,7 +50,6 @@
                             <div>
 
                             </div>
-
 
                         </div>
                         <div class="col-md-4"></div>

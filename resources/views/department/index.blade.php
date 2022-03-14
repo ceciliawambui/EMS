@@ -90,6 +90,7 @@
                                 <table class="table table-bordered" id="datatable-crud" style="width: 100%">
                                     <thead>
                                         <tr>
+                                            <th>Department Number</th>
                                             <th>Department</th>
                                             <th>Action</th>
                                         </tr>
@@ -119,7 +120,12 @@
                             }
                         },
 
-                        columns: [{
+                        columns: [
+                            {
+                                data: 'department_no',
+                                name: 'department_no'
+                            },
+                            {
                                 data: 'name',
                                 name: 'name'
                             },

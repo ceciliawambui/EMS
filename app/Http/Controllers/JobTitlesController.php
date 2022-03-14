@@ -60,7 +60,7 @@ class JobTitlesController extends Controller
 
         return redirect()->route('jobtitles.index');
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -80,9 +80,12 @@ class JobTitlesController extends Controller
      */
     public function store(Request $request){
         $request->validate([
-        'name' => 'required',
+            'job_title_no' => 'required',
+            'name' => 'required',
+
         ]);
         $jobtitle = new JobTitle;
+        $jobtitle->job_title_no = $request->job_title_no;
         $jobtitle->name = $request->name;
         $jobtitle->save();
         return redirect()->route('jobtitles.index');
@@ -118,10 +121,13 @@ class JobTitlesController extends Controller
      */
     public function update(Request $request, $id){
         $request->validate([
-        'name' => 'required',
+            'job_title_no' => 'required',
+            'name' => 'required',
+
         ]);
 
         $jobtitle = JobTitle::find($id);
+        $jobtitle->job_title_no = $request->job_title_no;
         $jobtitle->name = $request->name;
         $jobtitle->save();
         return redirect()->route('jobtitles.index');
@@ -146,31 +152,32 @@ class JobTitlesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      *  @return \Illuminate\Http\Response
      */
-    public function search(Request $request) {
-        $constraints = [
-            'name' => $request['name']
-            ];
+    // public function search(Request $request) {
+    //     $constraints = [
+    //         'name' => $request['name']
+    //         ];
 
-       $jobs = $this->doSearchingQuery($constraints);
-       return view('jobtitles/index', ['jobs' => $jobs, 'searchingVals' => $constraints]);
-    }
+    //    $jobs = $this->doSearchingQuery($constraints);
+    //    return view('jobtitles/index', ['jobs' => $jobs, 'searchingVals' => $constraints]);
+    // }
 
-    private function doSearchingQuery($constraints) {
-        $query = name::query();
-        $fields = array_keys($constraints);
-        $index = 0;
-        foreach ($constraints as $constraint) {
-            if ($constraint != null) {
-                $query = $query->where( $fields[$index], 'like', '%'.$constraint.'%');
-            }
+    // private function doSearchingQuery($constraints) {
+    //     $query = name::query();
+    //     $fields = array_keys($constraints);
+    //     $index = 0;
+    //     foreach ($constraints as $constraint) {
+    //         if ($constraint != null) {
+    //             $query = $query->where( $fields[$index], 'like', '%'.$constraint.'%');
+    //         }
 
-            $index++;
-        }
-        return $query->paginate(20);
-    }
+    //         $index++;
+    //     }
+    //     return $query->paginate(20);
+    // }
     private function validateInput($request) {
         $this->validate($request, [
-        'name' => 'required|max:60|unique:jobtitles'
+            'job_title_no' => 'required',
+            'name' => 'required'
     ]);
     }
 }

@@ -10,7 +10,7 @@ class JobTitle extends Model
 {
     use HasFactory;
     protected $table = 'jobtitles';
-    protected $fillable = ['name'];
+    protected $fillable = ['job_title_no','name'];
     use SoftDeletes;
     protected $dates = ['deleted_at'];
 

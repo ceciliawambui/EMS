@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('jobtitles', function (Blueprint $table) {
             $table->id();
+            $table->string('job_title_no');
             $table->string('name');
             $table->softDeletes();
             $table->timestamps();

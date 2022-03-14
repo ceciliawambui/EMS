@@ -93,6 +93,7 @@
                                 <table class="table table-bordered" id="datatable-crud" style="width: 100%">
                                     <thead>
                                         <tr>
+                                            <th>Job Title Number</th>
                                             <th>Job Title</th>
                                             <th>Action</th>
                                         </tr>
@@ -125,12 +126,19 @@
                         "autoWidth": false, // might need this
 
                         columns: [
+                            
+                            {
+                                data: 'job_title_no',
+                                name: 'job_title_no',
+
+                            },
 
                             {
                                 data: 'name',
                                 name: 'name',
 
                             },
+
                             {
                                 data: 'action',
                                 name: 'action',
@@ -172,7 +180,7 @@
     </html>
 
     </main>
-    
+
 
     </body>
 

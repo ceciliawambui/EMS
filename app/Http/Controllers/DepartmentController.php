@@ -42,7 +42,7 @@ class DepartmentController extends Controller
                 ->addIndexColumn()
                 ->make(true);
         }
-     
+
 
         return view('department.index');
     }
@@ -60,7 +60,7 @@ class DepartmentController extends Controller
 
         return redirect()->route('department.index');
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -81,15 +81,17 @@ class DepartmentController extends Controller
 
     public function store(Request $request){
         $request->validate([
-        'name' => 'required',
+            'department_no' => 'required',
+            'name' => 'required',
         ]);
         $departments = new Department;
+        $departments->department_no = $request->department_no;
         $departments->name = $request->name;
         $departments->save();
         return redirect()->route('department.index');
 
     }
-    
+
 
     /**
      * Display the specified resource.
@@ -115,7 +117,7 @@ class DepartmentController extends Controller
     public function edit(Department $department){
         return view('department.edit',compact('department'));
     }
-    
+
 
     /**
      * Update the specified resource in storage.
@@ -126,9 +128,11 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, $id){
         $request->validate([
-        'name' => 'required',
+            'department_no' => 'required',
+            'name' => 'required',
         ]);
         $departments = Department::find($id);
+        $departments->department_no = $request->department_no;
         $departments->name = $request->name;
         $departments->save();
         return redirect()->route('department.index');
@@ -154,31 +158,32 @@ class DepartmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      *  @return \Illuminate\Http\Response
      */
-    public function search(Request $request) {
-        $constraints = [
-            'name' => $request['name']
-            ];
+    // public function search(Request $request) {
+    //     $constraints = [
+    //         'name' => $request['name']
+    //         ];
 
-       $departments = $this->doSearchingQuery($constraints);
-       return view('department/index', ['departments' => $departments, 'searchingVals' => $constraints]);
-    }
+    //    $departments = $this->doSearchingQuery($constraints);
+    //    return view('department/index', ['departments' => $departments, 'searchingVals' => $constraints]);
+    // }
 
-    private function doSearchingQuery($constraints) {
-        $query = department::query();
-        $fields = array_keys($constraints);
-        $index = 0;
-        foreach ($constraints as $constraint) {
-            if ($constraint != null) {
-                $query = $query->where( $fields[$index], 'like', '%'.$constraint.'%');
-            }
+    // private function doSearchingQuery($constraints) {
+    //     $query = department::query();
+    //     $fields = array_keys($constraints);
+    //     $index = 0;
+    //     foreach ($constraints as $constraint) {
+    //         if ($constraint != null) {
+    //             $query = $query->where( $fields[$index], 'like', '%'.$constraint.'%');
+    //         }
 
-            $index++;
-        }
-        return $query->paginate(20);
-    }
+    //         $index++;
+    //     }
+    //     return $query->paginate(20);
+    // }
     private function validateInput($request) {
         $this->validate($request, [
-        'name' => 'required|max:60|unique:department'
+            'department_no' => 'required',
+            'name' => 'required'
     ]);
     }
 }
