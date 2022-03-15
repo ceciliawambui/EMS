@@ -74,6 +74,23 @@ Route::get('employees/forceDelete/{id}', 'App\Http\Controllers\EmployeesControll
 Route::get('employees/restore-all', 'App\Http\Controllers\EmployeesController@restoreAll')->name('employees.restoreAll');
 Route::get('employees/softDelete', 'App\Http\Controllers\EmployeesController@softDelete')->name('employees.softDelete');
 
+// Companies Routes
+Route::resource('companies', 'App\Http\Controllers\CompanyController');
+Route::post('delete-company', 'App\Http\Controllers\CompanyControllerr@destroy');
+Route::get('companies/restore/{id}', 'App\Http\Controllers\CompanyController@restore')->name('companies.restore');
+Route::get('companies/forceDelete/{id}', 'App\Http\Controllers\CompanyController@forceDelete')->name('companies.forceDelete');
+Route::get('companies/restore-all', 'App\Http\Controllers\CompanyController@restoreAll')->name('companies.restoreAll');
+Route::get('companies/softDelete', 'App\Http\Controllers\CompanyController@softDelete')->name('companies.softDelete');
+
+// Company_users Routes
+Route::resource('company_users', 'App\Http\Controllers\CompanyUserController');
+// Route::post('delete-company-users', 'App\Http\Controllers\CompanyControllerr@destroy');
+// Route::get('companies/restore/{id}', 'App\Http\Controllers\CompanyController@restore')->name('companies.restore');
+// Route::get('companies/forceDelete/{id}', 'App\Http\Controllers\CompanyController@forceDelete')->name('companies.forceDelete');
+// Route::get('companies/restore-all', 'App\Http\Controllers\CompanyController@restoreAll')->name('companies.restoreAll');
+// Route::get('companies/softDelete', 'App\Http\Controllers\CompanyController@softDelete')->name('companies.softDelete');
+
+
 // sample mailing using gmail
 Route::get('send-email', function () {
 

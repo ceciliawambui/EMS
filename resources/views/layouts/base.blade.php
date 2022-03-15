@@ -76,6 +76,18 @@
                               <i class="fa fa-users float-right"></i>
                             </a>
                           </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="{{ url('companies') }}">
+                              <span class="menu-title"  style="font-family: 'Times New Roman', Times, serif">Companies</span>
+                              <i class="fa fa-users float-right"></i>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="{{ url('company_users') }}">
+                              <span class="menu-title"  style="font-family: 'Times New Roman', Times, serif">Company Users</span>
+                              <i class="fa fa-users float-right"></i>
+                            </a>
+                          </li>
                     </ul>
                     {{-- <div class="nav">
                         <div class="sb-sidenav-menu-heading">EMS</div>
