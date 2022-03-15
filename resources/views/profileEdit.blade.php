@@ -79,13 +79,13 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="email_address" class="col-md-4 col-form-label text-md-right"
+                                            <label for="email" class="col-md-4 col-form-label text-md-right"
                                                 style="font-family:'Times New Roman', Times, serif">E-Mail<span
                                                     style="color: red">*</span>
                                             </label>
                                             <div class="col-md-6">
-                                                <input type="text" id="email_address" class="form-control" name="email"
-                                                    value=" {{ Auth::user()->email }}">
+                                                <input type="text" id="email" class="form-control" name="email"
+                                                    value=" {{ Auth::user()->email }}" required autofocus>
                                                 @if ($errors->has('email'))
                                                     <span class="text-danger">{{ $errors->first('email') }}</span>
                                                 @endif

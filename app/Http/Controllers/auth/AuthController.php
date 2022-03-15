@@ -152,14 +152,14 @@ class AuthController extends Controller
     public function update(Request $request){
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' =>  ['required', 'email'],
+            'email' =>  ['required', 'string', 'email', 'max:255', 'unique:users'],
         'confirm_password' => ['same:new_password'],
         //  'new_password' => ['same:new_password'],
 
         ]);
         $user = Auth::user(); //single user
         $user->name = $request->name;
-        // $user->email = $request->email;
+        $user->email = $request->email;
         if($request->hasFile('image')){
             $filename = $request->image->getClientOriginalName();
             $request->image->storeAs('images',$filename,'public');
@@ -175,7 +175,6 @@ class AuthController extends Controller
         $user->save();
         // return('You have successfully updated your profile');
         return view('profile', compact('user'))->with('success','You have successfully updated your profile');
-
     }
 
 }
