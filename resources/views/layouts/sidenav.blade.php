@@ -127,18 +127,18 @@
                                         <div class="col-md-6">
                                             <h5
                                                 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                                Companies
+                                                Company Users
                                             </h5>
                                         </div>
                                         <div class="col-md-2 offset-md-4">
-                                            <i class="fa fa-building fa-2x"></i>
+                                            <i class="fa fa-user-circle fa-2x"></i>
                                         </div>
                                     </div>
-                                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the different companies
+                                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the different companies users.
                                 </p>
-                                <div class="h1 mb-0 font-weight-normal text-gray-800">{{$countJobTitles}}</div>
+                                <div class="h1 mb-0 font-weight-normal text-gray-800">{{$countCompanyusers}}</div>
 
-                                <a href="{{ url('companies') }}"
+                                <a href="{{ url('company_users') }}"
                                     class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                     More Info
                                     <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
@@ -158,18 +158,18 @@
                                         <div class="col-md-6">
                                             <h5
                                                 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                                Company Users
+                                                Companies
                                             </h5>
                                         </div>
                                         <div class="col-md-2 offset-md-4">
                                             <i class="fa fa-building fa-2x"></i>
                                         </div>
                                     </div>
-                                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the different companies users.
+                                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the different companies
                                 </p>
-                                <div class="h1 mb-0 font-weight-normal text-gray-800">{{$countJobTitles}}</div>
+                                <div class="h1 mb-0 font-weight-normal text-gray-800">{{$countCompanies }}</div>
 
-                                <a href="{{ url('company_users') }}"
+                                <a href="{{ url('companies') }}"
                                     class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                     More Info
                                     <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"

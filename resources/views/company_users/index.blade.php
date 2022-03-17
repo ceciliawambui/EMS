@@ -1,5 +1,5 @@
 @extends('layouts.base')
-@extends('department.base')
+@extends('company_users.base')
 @section('content')
     <!DOCTYPE html>
     <html lang="en">
@@ -29,9 +29,11 @@
                 line-height: .5;
                 border-radius: .2rem;
             }
+
             .table.dataTable td {
                 padding: 3px;
             }
+
             .table.dataTable th {
                 padding: 3px;
             }
@@ -58,8 +60,9 @@
 
                                 </div>
                                 <div class="grid grid-cols-4 gap-4">
-                                    <div><a class="btn btn-success btn-sm" href="{{ route('department.create') }}"> Create
-                                            Company Users</a></div>
+                                    <div><a class="btn btn-success btn-sm" href="{{ route('company_users.create') }}">
+                                            Create
+                                            Company User</a></div>
 
 
                                     <div></div>
@@ -90,7 +93,6 @@
                                 <table class="table table-bordered" id="datatable-crud" style="width: 100%">
                                     <thead>
                                         <tr>
-                                            {{-- <th>Department Number</th> --}}
                                             <th>Company User</th>
                                             <th>Action</th>
                                         </tr>
@@ -114,14 +116,13 @@
                         serverSide: true,
                         responsive: true,
                         ajax: {
-                            url: "{{ url('companyusers') }}",
+                            url: "{{ url('company_users') }}",
                             data: function(value) {
                                 value.trashed = $("#trashed").val()
                             }
                         },
 
-                        columns: [
-                            {
+                        columns: [{
                                 data: 'name',
                                 name: 'name'
                             },
@@ -156,7 +157,7 @@
                         }
                     });
                     $('.dataTables_filter input[type="search"]')
-                     .attr('placeholder','  Search...')
+                        .attr('placeholder', '  Search...')
 
                     $('#filterTrashed').click(function() {
                         $('#datatable-crud').DataTable().draw(true)
@@ -164,17 +165,13 @@
                 });
             </script>
 
-    </html>
+            </main>
 
 
-    </main>
-
-
-    </div>
-    </div>
+        </div>
+        </div>
 
     </body>
 
     </html>
 @endsection
-

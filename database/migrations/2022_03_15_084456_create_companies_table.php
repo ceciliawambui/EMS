@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('contact_person');
             // $table->string('company_user_id');
             $table->unsignedBigInteger('company_user_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

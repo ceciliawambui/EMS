@@ -108,7 +108,7 @@
             @endif
         </div>
     </div>
-    <div class="form-group{{ $errors->has('company_user_id') ? ' has-error' : '' }}">
+    {{-- <div class="form-group{{ $errors->has('company_user_id') ? ' has-error' : '' }}">
         <label for="company_user_id" class="col-md-4 control-label">Company User</label>
 
         <div class="col-md-6">
@@ -121,27 +121,25 @@
             </span>
             @endif
         </div>
-    </div>
+    </div> --}}
 
     <!-- selection of department -->
-    {{-- <div class="form-group{{ $errors->has('department_id') ? ' has-error' : '' }}">
-        <label class="col-md-4 control-label">Department</label>
+    <div class="form-group{{ $errors->has('company_user_id') ? ' has-error' : '' }}">
+        <label class="col-md-4 control-label">Company User</label>
         <div class="col-md-6">
-            <select class="form-control" name="department_id">
-                <option  value="">Please select your department</option>
-                @foreach ($departments as $department)
-                <option value="{{$department->id}}" {{$department->id == $employee->department_id ? "selected": ""}}>{{$department->name}}</option>
+            <select class="form-control" name="company_user_id">
+                <option  value="">Please select the company user</option>
+                @foreach ($companyusers as $companyUser)
+                <option value="{{$companyUser->id}}" {{$companyUser->id == $company->company_user_id ? "selected": ""}}>{{$companyUser->name}}</option>
                 @endforeach
             </select>
-            @if ($errors->has('department_id'))
+            @if ($errors->has('company_user_id'))
         <span class="help-block">
-            <strong>{{ $errors->first('department_id') }}</strong>
+            <strong>{{ $errors->first('company_user_id') }}</strong>
         </span>
         @endif
         </div>
-    </div> --}}
-    <!-- selection for the job titles -->
-
+    </div>
 
 
         <button type="submit" class="btn btn-success ml-3 btn-sm">Update</button>

@@ -151,7 +151,7 @@
                                 name: 'contact_person'
                             },
                             {
-                                data: 'company_user_id',
+                                data: 'company_user',
                                 name: 'company_user_id'
                             },
                             {

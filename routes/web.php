@@ -76,7 +76,7 @@ Route::get('employees/softDelete', 'App\Http\Controllers\EmployeesController@sof
 
 // Companies Routes
 Route::resource('companies', 'App\Http\Controllers\CompanyController');
-Route::post('delete-company', 'App\Http\Controllers\CompanyControllerr@destroy');
+Route::post('delete-company', 'App\Http\Controllers\CompanyController@destroy');
 Route::get('companies/restore/{id}', 'App\Http\Controllers\CompanyController@restore')->name('companies.restore');
 Route::get('companies/forceDelete/{id}', 'App\Http\Controllers\CompanyController@forceDelete')->name('companies.forceDelete');
 Route::get('companies/restore-all', 'App\Http\Controllers\CompanyController@restoreAll')->name('companies.restoreAll');
@@ -84,11 +84,11 @@ Route::get('companies/softDelete', 'App\Http\Controllers\CompanyController@softD
 
 // Company_users Routes
 Route::resource('company_users', 'App\Http\Controllers\CompanyUserController');
-// Route::post('delete-company-users', 'App\Http\Controllers\CompanyControllerr@destroy');
-// Route::get('companies/restore/{id}', 'App\Http\Controllers\CompanyController@restore')->name('companies.restore');
-// Route::get('companies/forceDelete/{id}', 'App\Http\Controllers\CompanyController@forceDelete')->name('companies.forceDelete');
-// Route::get('companies/restore-all', 'App\Http\Controllers\CompanyController@restoreAll')->name('companies.restoreAll');
-// Route::get('companies/softDelete', 'App\Http\Controllers\CompanyController@softDelete')->name('companies.softDelete');
+Route::post('delete-company-users', 'App\Http\Controllers\CompanyUserController@destroy');
+Route::get('company_users/restore/{id}', 'App\Http\Controllers\CompanyUserController@restore')->name('company_users.restore');
+Route::get('company_users/forceDelete/{id}', 'App\Http\Controllers\CompanyUserController@forceDelete')->name('company_users.forceDelete');
+Route::get('company_users/restore-all', 'App\Http\Controllers\CompanyUserController@restoreAll')->name('company_users.restoreAll');
+Route::get('company_users/softDelete', 'App\Http\Controllers\CompanyUserController@softDelete')->name('company_users.softDelete');
 
 
 // sample mailing using gmail

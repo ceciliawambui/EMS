@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\CompanyUser;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -15,12 +16,15 @@ class CompanyController extends Controller
     public function index(Request $request)
     {
         if(request()->ajax()) {
-            $company = Company::query();
+            $company = Company::with(['companyUser']);
             return datatables()->of($company)
                 ->filter(function($query) use($request){
                     $query->when($request->trashed == 1, function($trashedCompanies){
                         $trashedCompanies->onlyTrashed();
                     });
+                })
+                ->editColumn('company_user', function($companyUser){
+                    return $companyUser->companyUser?->name ?? "NA";
                 })
                 ->addColumn('action', function($company) use($request) {
                     return view('companies.action', [
@@ -43,7 +47,8 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return view('companies.create');
+        $companyusers = CompanyUser::all(); // get all the company users
+        return view('companies.create', [ 'companyusers' => $companyusers]);
 
     }
 
@@ -57,9 +62,9 @@ class CompanyController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'phone' => 'required|numeric',
+            'phone' => 'required|numeric|digits:10',
             'email' => 'required|unique:companies',
-            'address' => 'required',
+            'address' => 'required|numeric',
             'location' => 'required',
             'contact_person' => 'required',
             'company_user_id' => 'required',
@@ -97,7 +102,8 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        return view('companies.edit',compact('company'));
+        $companyusers = CompanyUser::all(); // get all the company users
+        return view('companies.edit',compact('company', 'companyusers'));
 
     }
 
@@ -112,9 +118,9 @@ class CompanyController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'phone' => 'required|numeric',
+            'phone' => 'required|numeric|digits:10',
             'email' => 'required',
-            'address' => 'required',
+            'address' => 'required|numeric',
             'location' => 'required',
             'contact_person' => 'required',
             'company_user_id' => 'required',
@@ -137,7 +143,7 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Company $company)
+    public function destroy(Company $company, Request $request)
     {
         $com = Company::where('id',$request->id)->delete();
         return Response()->json($com);
@@ -168,13 +174,12 @@ class CompanyController extends Controller
     private function validateInput($request) {
         $this->validate($request, [
             'name' => 'required',
-            'phone' => 'required|numeric',
+            'phone' => 'required|numeric|digits:10',
             'email' => 'required|unique:companies',
-            'address' => 'required',
+            'address' => 'required|numeric',
             'location' => 'required',
             'contact_person' => 'required',
             'company_user_id' => 'required',
-
     ]);
 }
 

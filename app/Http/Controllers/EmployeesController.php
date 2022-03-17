@@ -75,12 +75,12 @@ class EmployeesController extends Controller
 
         return redirect()->route('employees.index');
     }
-    public function restoreAll()
-    {
-        Employee::onlyTrashed()->restore();
+    // public function restoreAll()
+    // {
+    //     Employee::onlyTrashed()->restore();
 
-        return redirect()->route('employees.index')->withSuccess(__('All employees restored successfully.'));
-    }
+    //     return redirect()->route('employees.index')->withSuccess(__('All employees restored successfully.'));
+    // }
 
     /**
      * Show the form for creating a new resource.

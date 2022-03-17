@@ -108,16 +108,16 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-4 control-label">User Name</label>
+                            <label class="col-md-4 control-label">Company User</label>
                             <div class="col-md-6">
-                                <input id="company_user_id" type="text" class="form-control" name="company_user_id"
-                                    value="{{ old('company_user_id') }}" required autofocus>
-                                {{-- <select class="form-control" name="user_id">
-                                    <option value="">Please select your user name</option>
-                                    @foreach ($companies as $companies)
-                                        <option value="{{ $companies->id }}">{{ $companies->name }}</option>
+                                {{-- <input id="company_user_id" type="text" class="form-control" name="company_user_id"
+                                    value="{{ old('company_user_id') }}" required autofocus> --}}
+                                <select class="form-control" name="company_user_id">
+                                    <option value="">Please select the Company User</option>
+                                    @foreach ($companyusers as $companyUser)
+                                    <option value="{{$companyUser->id}}">{{$companyUser->name}}</option>
                                     @endforeach
-                                </select> --}}
+                                </select>
                                 @if ($errors->has('company_user_id'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('company_user_id') }}</strong>

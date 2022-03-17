@@ -12,19 +12,19 @@ class CompanyUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         if(request()->ajax()) {
-            $companyuser = CompanyUser::query();
-            return datatables()->of($companyuser)
+            $companyUser = CompanyUser::query();
+            return datatables()->of($companyUser)
                 ->filter(function($query) use($request){
                     $query->when($request->trashed == 1, function($trashedCompanyUsers){
                         $trashedCompanyUsers->onlyTrashed();
                     });
                 })
-                ->addColumn('action', function($companyuser) use($request) {
-                    return view('companyusers.action', [
-                        'id' => $companyuser->id,
+                ->addColumn('action', function($companyUser) use($request) {
+                    return view('company_users.action', [
+                        'id' => $companyUser->id,
                         'trashed' => $request->trashed,
                     ]);
                 })
@@ -32,8 +32,7 @@ class CompanyUserController extends Controller
                 ->addIndexColumn()
                 ->make(true);
         }
-        return view('companyusers.index');
-        //
+        return view('company_users.index');
     }
 
     /**
@@ -43,7 +42,8 @@ class CompanyUserController extends Controller
      */
     public function create()
     {
-        //
+        return view('company_users.create');
+
     }
 
     /**
@@ -54,7 +54,13 @@ class CompanyUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+        $companyUser = new CompanyUser;
+        $companyUser->name = $request->name;
+        $companyUser->save();
+        return redirect()->route('company_users.index');
     }
 
     /**
@@ -65,7 +71,7 @@ class CompanyUserController extends Controller
      */
     public function show(CompanyUser $companyUser)
     {
-        //
+        // return view('company_users.show', compact('companyUser'));
     }
 
     /**
@@ -76,7 +82,7 @@ class CompanyUserController extends Controller
      */
     public function edit(CompanyUser $companyUser)
     {
-        //
+        return view('company_users.edit', compact('companyUser'));
     }
 
     /**
@@ -88,7 +94,12 @@ class CompanyUserController extends Controller
      */
     public function update(Request $request, CompanyUser $companyUser)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+        $companyUser->name = $request->name;
+        $companyUser->save();
+        return redirect()->route('company_users.index');
     }
 
     /**
@@ -97,8 +108,27 @@ class CompanyUserController extends Controller
      * @param  \App\Models\CompanyUser  $companyUser
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CompanyUser $companyUser)
+    public function destroy(CompanyUser $companyUser, Request $request)
     {
-        //
+        $com = CompanyUser::where('id',$request->id)->delete();
+        return Response()->json($com);
+    }
+    public function restore($id )
+    {
+        CompanyUser::where('id', $id)->withTrashed()->restore();
+
+        return redirect()->route('company_users.index');
+    }
+
+    public function forceDelete($id)
+    {
+        CompanyUser::where('id', $id)->onlyTrashed()->forceDelete();
+
+        return redirect()->route('company_users.index');
+    }
+    private function validateInput($request) {
+        $this->validate($request, [
+            'name' => 'required'
+    ]);
     }
 }
