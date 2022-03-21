@@ -52,20 +52,20 @@
                                 <div>
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item active" aria-current="page">Companies</li>
+                                            <li class="breadcrumb-item active" aria-current="page">Company</li>
                                         </ol>
                                     </nav>
 
                                 </div>
                                 <div class="grid grid-cols-4 gap-4">
-                                    <div><a class="btn btn-success btn-sm" href="{{ route('companies.create') }}"> Create
-                                            Company</a></div>
+                                    {{-- <div><a class="btn btn-success btn-sm" href="{{ route('companies.create') }}"> Create
+                                            Company</a></div> --}}
 
 
                                     <div></div>
                                     <div></div>
                                     <div>
-                                        <form name="viewTrashed" class="d-flex">
+                                        {{-- <form name="viewTrashed" class="d-flex">
                                             <select name="trashed" id="trashed" class="form-control mr-2 size=10">
                                                 <option value="">View Companies</option>
                                                 <option value="1">View Trashed</option>
@@ -73,7 +73,7 @@
 
                                             <button type="button" id="filterTrashed"
                                                 class="btn btn-sm btn-success btn-xs">Filter</button>
-                                        </form>
+                                        </form> --}}
 
                                     </div>
 

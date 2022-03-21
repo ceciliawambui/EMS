@@ -134,7 +134,6 @@ class CompanyController extends Controller
         $company->company_user_id = $request->company_user_id;
         $company->save();
         return redirect()->route('companies.index');
-        //
     }
 
     /**

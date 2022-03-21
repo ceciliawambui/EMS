@@ -59,6 +59,19 @@
                             </a>
                           </li>
                           <li class="nav-item">
+                            <a class="nav-link" href="{{ url('companies') }}">
+                              <span class="menu-title"  style="font-family: 'Times New Roman', Times, serif">Company</span>
+                              <i class="fa fa-building float-right"></i>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="{{ url('company_users') }}">
+                              <span class="menu-title"  style="font-family: 'Times New Roman', Times, serif">Users</span>
+                              <i class="fa fa-user-circle float-right"></i>
+                            </a>
+                          </li>
+
+                          <li class="nav-item">
                             <a class="nav-link" href="{{ url('jobtitles') }}">
                               <span class="menu-title"  style="font-family: 'Times New Roman', Times, serif">Job Titles</span>
                               <i class="fa fa-address-book float-right"></i>
@@ -76,18 +89,8 @@
                               <i class="fa fa-users float-right"></i>
                             </a>
                           </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="{{ url('company_users') }}">
-                              <span class="menu-title"  style="font-family: 'Times New Roman', Times, serif">Company Users</span>
-                              <i class="fa fa-user-circle float-right"></i>
-                            </a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="{{ url('companies') }}">
-                              <span class="menu-title"  style="font-family: 'Times New Roman', Times, serif">Companies</span>
-                              <i class="fa fa-users float-right"></i>
-                            </a>
-                          </li>
+
+
 
                     </ul>
                     {{-- <div class="nav">
