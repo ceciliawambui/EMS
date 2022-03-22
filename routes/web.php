@@ -30,12 +30,12 @@ Auth::routes(['verify' => true]);
 // Route::post('/email/resend', 'VerificationController@resend')->name('verification.resend');
 
 
-Route::get('/', [AuthController::class, 'index'])->name('login');
-Route::post('post-login', [AuthController::class, 'postLogin'])->name('login.post');
-Route::get('registration', [AuthController::class, 'registration'])->name('register');
-Route::post('post-registration', [AuthController::class, 'postRegistration'])->name('register.post');
-Route::get('dashboard', [AuthController::class, 'dashboard']);
-Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/', 'App\Http\Controllers\Auth\AuthController@index')->name('login');
+Route::post('post-login', 'App\Http\Controllers\Auth\AuthController@postLogin')->name('login.post');
+Route::get('registration', 'App\Http\Controllers\Auth\AuthController@registration')->name('register');
+Route::post('post-registration', 'App\Http\Controllers\Auth\AuthController@postRegistration')->name('register.post');
+Route::get('dashboard', 'App\Http\Controllers\Auth\AuthController@dashboard');
+Route::get('logout', 'App\Http\Controllers\Auth\AuthController@logout')->name('logout');
 // Route::get('upload', [AuthController::class, 'upload'])->name('upload');
 Route::get('edit', 'App\Http\Controllers\Auth\AuthController@edit')->name('edit');
 Route::post('update', 'App\Http\Controllers\Auth\AuthController@update')->name('update');
