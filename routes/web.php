@@ -30,7 +30,7 @@ Auth::routes(['verify' => true]);
 // Route::post('/email/resend', 'VerificationController@resend')->name('verification.resend');
 
 
-Route::get('/', 'App\Http\Controllers\Auth\AuthController@index')->name('login');
+Route::get('login', 'App\Http\Controllers\Auth\AuthController@index')->name('login');
 Route::post('post-login', 'App\Http\Controllers\Auth\AuthController@postLogin')->name('login.post');
 Route::get('registration', 'App\Http\Controllers\Auth\AuthController@registration')->name('register');
 Route::post('post-registration', 'App\Http\Controllers\Auth\AuthController@postRegistration')->name('register.post');
@@ -47,7 +47,7 @@ Route::post('change-password', 'App\Http\Controllers\ChangePasswordController@st
 
 
 
-Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
 
 // Profile(not used at the moment)
 Route::get('profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
