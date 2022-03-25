@@ -21,7 +21,7 @@ use App\User;
 // });
 
 // Authentication routes
-Auth::routes(['verify' => true]);
+// Auth::routes(['verify' => true]);
 
 // Verification Routes
 
