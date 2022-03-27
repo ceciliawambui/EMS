@@ -25,9 +25,9 @@ use App\User;
 
 // Verification Routes
 
-// Route::get('/email/verify', 'VerificationController@show')->name('verification.notice');
-// Route::get('/email/verify/{id}/{hash}', 'VerificationController@verify')->name('verification.verify')->middleware(['signed']);
-// Route::post('/email/resend', 'VerificationController@resend')->name('verification.resend');
+Route::get('/email/verify', 'App\Http\Controllers\auth\VerificationController@show')->name('verification.notice');
+Route::get('/email/verify/{id}/{hash}', 'App\Http\Controllers\auth\VerificationController@verify')->name('verification.verify')->middleware(['signed']);
+Route::post('/email/resend', 'App\Http\Controllers\auth\VerificationController@resend')->name('verification.resend');
 
 
 Route::get('/', 'App\Http\Controllers\auth\AuthController@index')->name('login');
@@ -40,6 +40,16 @@ Route::get('logout', 'App\Http\Controllers\auth\AuthController@logout')->name('l
 Route::get('edit', 'App\Http\Controllers\auth\AuthController@edit')->name('edit');
 Route::post('update', 'App\Http\Controllers\auth\AuthController@update')->name('update');
 // Route::resource('user', 'App\Http\Controllers\Auth\AuthController');
+
+Route::get('password/reset', 'App\Http\Controllers\auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'App\Http\Controllers\auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'App\Http\Controllers\auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset/', 'App\Http\Controllers\auth\ResetPasswordController@reset');
+
+Route::get('/confirm-password','App\Http\Controllers\auth\ConfirmPasswordController@show')
+    ->middleware('auth')
+    ->name('password.confirm');
+
 
 // Change Password
 Route::get('change-password', 'App\Http\Controllers\ChangePasswordController@index');
