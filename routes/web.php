@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Auth\AuthController;
+use Illuminate\Support\Facades\auth;
+use App\Http\Controllers\auth\AuthController;
 use App\User;
 
 
@@ -21,7 +21,7 @@ use App\User;
 // });
 
 // Authentication routes
-// Auth::routes(['verify' => true]);
+Auth::routes(['verify' => true]);
 
 // Verification Routes
 
@@ -30,15 +30,15 @@ use App\User;
 // Route::post('/email/resend', 'VerificationController@resend')->name('verification.resend');
 
 
-Route::get('/', 'App\Http\Controllers\Auth\AuthController@index')->name('login');
-Route::post('post-login', 'App\Http\Controllers\Auth\AuthController@postLogin')->name('login.post');
-Route::get('registration', 'App\Http\Controllers\Auth\AuthController@registration')->name('register');
-Route::post('post-registration', 'App\Http\Controllers\Auth\AuthController@postRegistration')->name('register.post');
-Route::get('dashboard', 'App\Http\Controllers\Auth\AuthController@dashboard');
-Route::get('logout', 'App\Http\Controllers\Auth\AuthController@logout')->name('logout');
+Route::get('/', 'App\Http\Controllers\auth\AuthController@index')->name('login');
+Route::post('post-login', 'App\Http\Controllers\auth\AuthController@postLogin')->name('login.post');
+Route::get('registration', 'App\Http\Controllers\auth\AuthController@registration')->name('register');
+Route::post('post-registration', 'App\Http\Controllers\auth\AuthController@postRegistration')->name('register.post');
+Route::get('dashboard', 'App\Http\Controllers\auth\AuthController@dashboard');
+Route::get('logout', 'App\Http\Controllers\auth\AuthController@logout')->name('logout');
 // Route::get('upload', [AuthController::class, 'upload'])->name('upload');
-Route::get('edit', 'App\Http\Controllers\Auth\AuthController@edit')->name('edit');
-Route::post('update', 'App\Http\Controllers\Auth\AuthController@update')->name('update');
+Route::get('edit', 'App\Http\Controllers\auth\AuthController@edit')->name('edit');
+Route::post('update', 'App\Http\Controllers\auth\AuthController@update')->name('update');
 // Route::resource('user', 'App\Http\Controllers\Auth\AuthController');
 
 // Change Password
