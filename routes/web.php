@@ -34,7 +34,7 @@ Route::post('/email/resend', 'App\Http\Controllers\auth\VerificationController@r
 
 
 Route::get('/', 'App\Http\Controllers\auth\AuthController@index')->name('login');
-Route::post('post-login', 'App\Http\Controllers\auth\AuthController@postLogin')->name('login.post');
+Route::get('post-login', 'App\Http\Controllers\auth\AuthController@postLogin')->name('login.post');
 Route::get('registration', 'App\Http\Controllers\auth\AuthController@registration')->name('register');
 Route::post('post-registration', 'App\Http\Controllers\auth\AuthController@postRegistration')->name('register.post');
 Route::get('dashboard', 'App\Http\Controllers\auth\AuthController@dashboard');
