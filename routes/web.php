@@ -5,9 +5,9 @@ use Illuminate\Support\Facades\auth;
 use App\Http\Controllers\auth\AuthController;
 use App\User;
 
-// if (env('APP_ENV') === 'production') {
-//     URL::forceSchema('https');
-// }
+if (env('APP_ENV') === 'production') {
+    URL::forceSchema('https');
+}
 
 /*
 |--------------------------------------------------------------------------
