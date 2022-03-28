@@ -44,11 +44,7 @@ class AuthController extends Controller
         $request->validate([
             'email'=>['required','email'],
             'password'=>'required',
-            // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            // 'password' => ['required', 'string', 'min:8', 'confirmed'],
-            // 'image' => 'required',
         ]);
-
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
