@@ -5,15 +5,15 @@
 
     RewriteEngine On
 
-    # forcing https from http 
+    # forcing https from http
     RewriteCond %{HTTPS} !on
     RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
     RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
     RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
     # Handle Authorization Header
-    RewriteCond %{HTTP:Authorization} .
-    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+    # RewriteCond %{HTTP:Authorization} .
+    # RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
