@@ -8,6 +8,9 @@ use App\User;
 // if (env('APP_ENV') === 'production') {
 //     URL::forceSchema('https');
 // }
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+});
 
 /*
 |--------------------------------------------------------------------------
