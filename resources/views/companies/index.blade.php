@@ -58,8 +58,8 @@
 
                                 </div>
                                 <div class="grid grid-cols-4 gap-4">
-                                    {{-- <div><a class="btn btn-success btn-sm" href="{{ route('companies.create') }}"> Create
-                                            Company</a></div> --}}
+                                    <div><a class="btn btn-success btn-sm" href="{{ route('companies.create') }}"> Create
+                                            Company</a></div>
 
 
                                     <div></div>
