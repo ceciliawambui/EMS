@@ -29,9 +29,11 @@
                 line-height: .5;
                 border-radius: .2rem;
             }
+
             .table.dataTable td {
                 padding: 3px;
             }
+
             .table.dataTable th {
                 padding: 3px;
             }
@@ -120,8 +122,7 @@
                             }
                         },
 
-                        columns: [
-                            {
+                        columns: [{
                                 data: 'department_no',
                                 name: 'department_no'
                             },
@@ -160,7 +161,7 @@
                         }
                     });
                     $('.dataTables_filter input[type="search"]')
-                     .attr('placeholder','  Search...')
+                        .attr('placeholder', '  Search...')
 
                     $('#filterTrashed').click(function() {
                         $('#datatable-crud').DataTable().draw(true)

@@ -72,141 +72,138 @@
                                          </form>
                                      </div>
 
+
+                                     @if ($message = Session::get('success'))
+                                         <div class="alert alert-success">
+                                             <p>{{ $message }}</p>
+                                         </div>
+                                     @endif
                                  </div>
-                             </div>
 
+                                 <table class="table table-bordered " id="datatable-crud" style="width: 100%">
+                                     <thead>
+                                         <tr>
+                                             <th>First Name</th>
+                                             <th>Last Name</th>
+                                             <th>Email</th>
+                                             <th>NSSF</th>
+                                             <th>NHIF</th>
+                                             <th>KRA Pin</th>
+                                             <th>Account Number</th>
+                                             <th>Bank</th>
+                                             <th>Job Title</th>
+                                             <th>Department</th>
+                                             <th>Salary</th>
+                                             <th>Action</th>
+                                         </tr>
+                                     </thead>
+                                 </table>
+
+                             </div>
                          </div>
-                         @if ($message = Session::get('success'))
-                             <div class="alert alert-success">
-                                 <p>{{ $message }}</p>
-                             </div>
-                         @endif
-
-                         <table class="table table-bordered " id="datatable-crud" style="width: 100%">
-                             <thead>
-                                 <tr>
-                                     <th>First Name</th>
-                                     <th>Last Name</th>
-                                     <th>Email</th>
-                                     <th>NSSF</th>
-                                     <th>NHIF</th>
-                                     <th>KRA Pin</th>
-                                     <th>Account Number</th>
-                                     <th>Bank</th>
-                                     <th>Job Title</th>
-                                     <th>Department</th>
-                                     <th>Salary</th>
-                                     <th>Action</th>
-                                 </tr>
-                             </thead>
-                         </table>
-
                      </div>
-                 </main>
              </div>
-         </div>
-
-         <script type="text/javascript">
-             $(document).ready(function() {
-                 $.ajaxSetup({
-                     headers: {
-                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                     }
-                 });
-                 $('#datatable-crud').DataTable({
-                     processing: true,
-                     serverSide: true,
-                     responsive: true,
-                     ajax: {
-                         url: "{{ url('employees') }}",
-                         data: function(filter) {
-                             filter.trashed = $('#trashed').val()
+             <script type="text/javascript">
+                 $(document).ready(function() {
+                     $.ajaxSetup({
+                         headers: {
+                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                          }
-                     },
-                     columns: [{
-                             data: 'first_name',
-                             name: 'first_name'
-                         },
-                         {
-                             data: 'last_name',
-                             name: 'last_name'
-                         },
-                         {
-                             data: 'email',
-                             name: 'email'
-                         },
-                         {
-                             data: 'nssf',
-                             name: 'nssf'
-                         },
-                         {
-                             data: 'nhif',
-                             name: 'nhif'
-                         },
-                         {
-                             data: 'kra_pin',
-                             name: 'kra_pin'
-                         },
-                         {
-                             data: 'account_number',
-                             name: 'account_number'
-                         },
-                         {
-                             data: 'bank',
-                             name: 'bank'
-                         },
-                         {
-                             data: 'job_title',
-                             name: 'job_title_id'
-                         },
-                         {
-                             data: 'department',
-                             name: 'department_id'
-                         },
-                         {
-                             data: 'salary',
-                             name: 'salary'
-                         },
-                         {
-                             data: 'action',
-                             name: 'action',
-                             orderable: false
-                         },
-                     ],
-                     order: [
-                         [0, 'desc']
-                     ]
-                 });
-                 $('.dataTables_filter input[type="search"]')
-                     .attr('placeholder', '  Search...')
-                 $('#filterTrashed').click(function() {
-                     $('#datatable-crud').DataTable().draw(true)
-                 })
-
-                 $('body').on('click', '.delete', function() {
-                     if (confirm("Delete Record?") == true) {
-                         var id = $(this).data('id');
-                         // ajax
-                         $.ajax({
-                             type: "POST",
-                             url: "{{ url('delete-employee') }}",
-                             data: {
-                                 id: id
-                             },
-                             dataType: 'json',
-                             success: function(res) {
-                                 var oTable = $('#datatable-crud').dataTable();
-                                 oTable.fnDraw(false);
+                     });
+                     $('#datatable-crud').DataTable({
+                         processing: true,
+                         serverSide: true,
+                         responsive: true,
+                         ajax: {
+                             url: "{{ url('employees') }}",
+                             data: function(filter) {
+                                 filter.trashed = $('#trashed').val()
                              }
-                         });
-                     }
+                         },
+                         columns: [{
+                                 data: 'first_name',
+                                 name: 'first_name'
+                             },
+                             {
+                                 data: 'last_name',
+                                 name: 'last_name'
+                             },
+                             {
+                                 data: 'email',
+                                 name: 'email'
+                             },
+                             {
+                                 data: 'nssf',
+                                 name: 'nssf'
+                             },
+                             {
+                                 data: 'nhif',
+                                 name: 'nhif'
+                             },
+                             {
+                                 data: 'kra_pin',
+                                 name: 'kra_pin'
+                             },
+                             {
+                                 data: 'account_number',
+                                 name: 'account_number'
+                             },
+                             {
+                                 data: 'bank',
+                                 name: 'bank'
+                             },
+                             {
+                                 data: 'job_title',
+                                 name: 'job_title_id'
+                             },
+                             {
+                                 data: 'department',
+                                 name: 'department_id'
+                             },
+                             {
+                                 data: 'salary',
+                                 name: 'salary'
+                             },
+                             {
+                                 data: 'action',
+                                 name: 'action',
+                                 orderable: false
+                             },
+                         ],
+                         order: [
+                             [0, 'desc']
+                         ]
+                     });
+                     $('.dataTables_filter input[type="search"]')
+                         .attr('placeholder', '  Search...')
+                     $('#filterTrashed').click(function() {
+                         $('#datatable-crud').DataTable().draw(true)
+                     })
+
+                     $('body').on('click', '.delete', function() {
+                         if (confirm("Delete Record?") == true) {
+                             var id = $(this).data('id');
+                             // ajax
+                             $.ajax({
+                                 type: "POST",
+                                 url: "{{ url('delete-employee') }}",
+                                 data: {
+                                     id: id
+                                 },
+                                 dataType: 'json',
+                                 success: function(res) {
+                                     var oTable = $('#datatable-crud').dataTable();
+                                     oTable.fnDraw(false);
+                                 }
+                             });
+                         }
+                     });
                  });
-             });
-         </script>
+             </script>
+             </main>
 
-     </html>
-     </main>
-
+         </div>
+         </div>
 
 
      </body>
