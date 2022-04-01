@@ -47,14 +47,16 @@
          <div id="layoutSidenav">
              <div id="layoutSidenav_content">
                  <main>
-                     <div class="container-fluid">
+                     <div class="container-xxl">
                          <div class="row">
                              <div class="col-lg-12">
-                                 <nav aria-label="breadcrumb">
-                                     <ol class="breadcrumb">
-                                         <li class="breadcrumb-item active" aria-current="page">Employees</li>
-                                     </ol>
-                                 </nav>
+                                 <div>
+                                     <nav aria-label="breadcrumb">
+                                         <ol class="breadcrumb">
+                                             <li class="breadcrumb-item active" aria-current="page">Employees</li>
+                                         </ol>
+                                     </nav>
+                                 </div>
                                  <div class="grid grid-cols-4 gap-4">
                                      <div><a class="btn btn-success btn-sm" href="{{ route('employees.create') }}"> Create
                                              Employee</a></div>
@@ -71,7 +73,6 @@
                                                  class="btn btn-sm btn-success  btn-xs">Filter</button>
                                          </form>
                                      </div>
-
 
                                      @if ($message = Session::get('success'))
                                          <div class="alert alert-success">

@@ -169,8 +169,6 @@
                 });
             </script>
 
-    </html>
-
 
     </main>
 
