@@ -192,9 +192,6 @@
                 });
             </script>
 
-    </html>
-
-
     </main>
 
 
